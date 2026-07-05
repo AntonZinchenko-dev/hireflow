@@ -21,13 +21,21 @@ export default function RegisterPage() {
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const router = useRouter();
-  const supabase = createClient();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
     setMessage(null);
     setIsPending(true);
+
+    let supabase;
+    try {
+      supabase = createClient();
+    } catch {
+      setIsPending(false);
+      setError("Конфигурация Supabase не найдена. Проверьте переменные окружения.");
+      return;
+    }
 
     const { data, error: signUpError } = await supabase.auth.signUp({
       email,

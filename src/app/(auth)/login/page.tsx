@@ -15,12 +15,20 @@ export default function LoginPage() {
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const supabase = createClient();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
     setIsPending(true);
+
+    let supabase;
+    try {
+      supabase = createClient();
+    } catch {
+      setIsPending(false);
+      setError("Конфигурация Supabase не найдена. Проверьте переменные окружения.");
+      return;
+    }
 
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
