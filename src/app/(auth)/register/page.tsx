@@ -60,19 +60,19 @@ export default function RegisterPage() {
     <main className="flex min-h-screen items-center justify-center px-6 py-12">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md space-y-6 rounded-3xl border border-slate-200/80 bg-white/95 p-8 shadow-[0_20px_50px_-28px_rgba(15,23,42,0.55)]"
+        className="w-full max-w-md space-y-6 rounded-lg border border-[#3a3d44] bg-[#2b2d31]/95 p-8 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.8)]"
       >
         <div className="space-y-1">
           <p className="text-xs font-medium uppercase tracking-[0.16em] text-indigo-600">Create account</p>
-          <h2 className="text-3xl font-semibold tracking-tight text-slate-900">Регистрация</h2>
-          <p className="text-sm text-slate-500">Выберите тип аккаунта и создайте доступ.</p>
+          <h2 className="text-3xl font-semibold tracking-tight text-[#f2f3f5]">Регистрация</h2>
+          <p className="text-sm text-[#b5bac1]">Выберите тип аккаунта и создайте доступ.</p>
         </div>
-        <div className="flex gap-2 rounded-2xl border border-slate-200 bg-slate-50 p-1">
+        <div className="flex gap-2 rounded-lg border border-[#3a3d44] bg-[#232428] p-1">
           <button
             type="button"
             onClick={() => setAccountType("candidate")}
-            className={`flex-1 rounded-xl px-3 py-2 text-sm font-medium transition ${
-              accountType === "candidate" ? "bg-white text-indigo-700 shadow-sm" : "text-slate-600"
+            className={`flex-1 rounded-md px-3 py-2 text-sm font-medium transition ${
+              accountType === "candidate" ? "bg-[#313338] text-indigo-300 shadow-sm" : "text-[#8f95a0]"
             }`}
           >
             Я кандидат
@@ -80,8 +80,8 @@ export default function RegisterPage() {
           <button
             type="button"
             onClick={() => setAccountType("employer")}
-            className={`flex-1 rounded-xl px-3 py-2 text-sm font-medium transition ${
-              accountType === "employer" ? "bg-white text-indigo-700 shadow-sm" : "text-slate-600"
+            className={`flex-1 rounded-md px-3 py-2 text-sm font-medium transition ${
+              accountType === "employer" ? "bg-[#313338] text-indigo-300 shadow-sm" : "text-[#8f95a0]"
             }`}
           >
             Я работодатель
@@ -94,7 +94,7 @@ export default function RegisterPage() {
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             required
-            className="h-11 rounded-xl"
+            className="h-11 rounded-md"
           />
           <Input
             type="email"
@@ -102,7 +102,7 @@ export default function RegisterPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="h-11 rounded-xl"
+            className="h-11 rounded-md"
           />
           <div className="relative">
             <Input
@@ -112,27 +112,27 @@ export default function RegisterPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
               minLength={6}
-              className="h-11 rounded-xl pr-10"
+              className="h-11 rounded-md pr-10"
             />
             <button
               type="button"
               onClick={() => setShowPassword((value) => !value)}
-              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md p-1 text-slate-500 transition hover:bg-slate-100 hover:text-slate-700"
+              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md p-1 text-[#8f95a0] transition hover:bg-[#353841] hover:text-[#dbdee1]"
               aria-label={showPassword ? "Скрыть пароль" : "Показать пароль"}
             >
               {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
             </button>
           </div>
         </div>
-        <Badge variant="outline" className="w-full justify-center py-1.5 text-slate-600">
+        <Badge variant="outline" className="w-full justify-center py-1.5 text-[#b5bac1]">
           Тип аккаунта: {accountType === "employer" ? "Работодатель" : "Кандидат"}
         </Badge>
-        {error && <p className="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
-        {message && <p className="rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-700">{message}</p>}
-        <Button type="submit" className="h-11 w-full rounded-xl" disabled={isPending}>
+        {error && <p className="rounded-md border border-red-900/40 bg-red-950/40 px-3 py-2 text-sm text-red-300">{error}</p>}
+        {message && <p className="rounded-md border border-emerald-900/40 bg-emerald-950/30 px-3 py-2 text-sm text-emerald-300">{message}</p>}
+        <Button type="submit" className="h-11 w-full rounded-md" disabled={isPending}>
           {isPending ? "Создаем аккаунт..." : "Создать аккаунт"}
         </Button>
-        <p className="text-center text-sm text-slate-500">
+        <p className="text-center text-sm text-[#b5bac1]">
           Уже есть аккаунт?{" "}
           <Link href="/login" className="font-medium text-indigo-600 hover:text-indigo-700">
             Войти

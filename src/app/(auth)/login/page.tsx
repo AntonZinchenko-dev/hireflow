@@ -41,7 +41,7 @@ export default function LoginPage() {
 
   return (
     <main className="grid min-h-screen grid-cols-1 bg-transparent lg:grid-cols-[1.05fr_0.95fr]">
-      <section className="relative hidden overflow-hidden border-r border-slate-200/70 bg-gradient-to-br from-indigo-600 via-indigo-500 to-sky-500 p-12 text-white lg:block">
+      <section className="relative hidden overflow-hidden border-r border-[#3a3d44] bg-gradient-to-br from-[#313338] via-[#2b2d31] to-[#1e1f22] p-12 text-white lg:block">
         <div className="absolute -right-20 -top-20 size-72 rounded-full bg-white/15 blur-3xl" />
         <div className="absolute -bottom-24 left-0 size-80 rounded-full bg-cyan-300/20 blur-3xl" />
         <div className="relative space-y-8">
@@ -54,15 +54,15 @@ export default function LoginPage() {
             </p>
           </div>
           <div className="space-y-3">
-            <div className="flex items-center gap-3 rounded-2xl bg-white/10 p-3">
+            <div className="flex items-center gap-3 rounded-lg bg-white/10 p-3">
               <Sparkles className="size-4 shrink-0" />
               <p className="text-sm">Единая доска по всем этапам подбора</p>
             </div>
-            <div className="flex items-center gap-3 rounded-2xl bg-white/10 p-3">
+            <div className="flex items-center gap-3 rounded-lg bg-white/10 p-3">
               <Target className="size-4 shrink-0" />
               <p className="text-sm">Прозрачная конверсия и узкие места воронки</p>
             </div>
-            <div className="flex items-center gap-3 rounded-2xl bg-white/10 p-3">
+            <div className="flex items-center gap-3 rounded-lg bg-white/10 p-3">
               <TimerReset className="size-4 shrink-0" />
               <p className="text-sm">Меньше ручных апдейтов, больше живой работы</p>
             </div>
@@ -72,12 +72,12 @@ export default function LoginPage() {
       <section className="flex items-center justify-center px-6 py-12">
         <form
           onSubmit={handleSubmit}
-          className="w-full max-w-md space-y-6 rounded-3xl border border-slate-200/80 bg-white/95 p-8 shadow-[0_20px_50px_-28px_rgba(15,23,42,0.55)]"
+          className="w-full max-w-md space-y-6 rounded-lg border border-[#3a3d44] bg-[#2b2d31]/95 p-8 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.8)]"
         >
           <div className="space-y-1">
             <p className="text-xs font-medium uppercase tracking-[0.16em] text-indigo-600">Welcome back</p>
-            <h2 className="text-3xl font-semibold tracking-tight text-slate-900">Вход в HireFlow</h2>
-            <p className="text-sm text-slate-500">Используйте рабочий аккаунт для доступа.</p>
+            <h2 className="text-3xl font-semibold tracking-tight text-[#f2f3f5]">Вход в HireFlow</h2>
+            <p className="text-sm text-[#b5bac1]">Используйте рабочий аккаунт для доступа.</p>
           </div>
           <div className="space-y-3">
             <Input
@@ -86,7 +86,7 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="h-11 rounded-xl"
+              className="h-11 rounded-md"
             />
             <div className="relative">
               <Input
@@ -95,23 +95,23 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="h-11 rounded-xl pr-10"
+                className="h-11 rounded-md pr-10"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword((value) => !value)}
-                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md p-1 text-slate-500 transition hover:bg-slate-100 hover:text-slate-700"
+                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md p-1 text-[#8f95a0] transition hover:bg-[#353841] hover:text-[#dbdee1]"
                 aria-label={showPassword ? "Скрыть пароль" : "Показать пароль"}
               >
                 {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
               </button>
             </div>
           </div>
-          {error && <p className="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
-          <Button type="submit" className="h-11 w-full rounded-xl" disabled={isPending}>
+          {error && <p className="rounded-md border border-red-900/40 bg-red-950/40 px-3 py-2 text-sm text-red-300">{error}</p>}
+          <Button type="submit" className="h-11 w-full rounded-md" disabled={isPending}>
             {isPending ? "Входим..." : "Войти"}
           </Button>
-          <p className="text-center text-sm text-slate-500">
+          <p className="text-center text-sm text-[#b5bac1]">
             Нет аккаунта?{" "}
             <Link href="/register" className="font-medium text-indigo-600 hover:text-indigo-700">
               Зарегистрироваться

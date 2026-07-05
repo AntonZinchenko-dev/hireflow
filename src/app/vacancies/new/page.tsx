@@ -9,8 +9,8 @@ export default function NewVacancyPage() {
     <section className="mx-auto grid max-w-4xl gap-6 lg:grid-cols-[1.1fr_0.9fr]">
       <div className="hf-card p-7">
         <p className="hf-section-label">Create position</p>
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight text-slate-900">Новая вакансия</h1>
-        <p className="mt-2 text-sm text-slate-500">
+        <h1 className="mt-2 text-3xl font-semibold tracking-tight text-[#f2f3f5]">Новая вакансия</h1>
+        <p className="mt-2 text-sm text-[#b5bac1]">
           Заполните основные поля. Канбан-этапы будут готовы сразу после создания.
         </p>
         <form action={createVacancyAction} className="mt-7 hf-form-grid">
@@ -28,8 +28,8 @@ export default function NewVacancyPage() {
         </form>
       </div>
       <aside className="hf-card-tight p-6">
-        <h2 className="text-lg font-semibold text-slate-900">Что будет дальше</h2>
-        <ul className="mt-4 space-y-3 text-sm text-slate-600">
+        <h2 className="text-lg font-semibold text-[#f2f3f5]">Что будет дальше</h2>
+        <ul className="mt-4 space-y-3 text-sm text-[#b5bac1]">
           <li>Откроется доска кандидатов по новой вакансии.</li>
           <li>Появятся этапы воронки с drag-and-drop.</li>
           <li>Аналитика начнет считать конверсию по стадиям.</li>

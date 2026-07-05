@@ -72,15 +72,15 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen">
-      <header className="sticky top-0 z-30 border-b border-slate-200/70 bg-white/70 backdrop-blur-xl">
+      <header className="sticky top-0 z-30 border-b border-[#3a3d44] bg-[#1e1f22]/90 backdrop-blur-xl">
         <div className="mx-auto flex h-[4.5rem] w-full max-w-[1600px] items-center justify-between gap-4 px-4 sm:px-6">
           <Link href={homeHref} className="flex items-center gap-2">
-            <span className="inline-flex size-8 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-sky-500 text-white shadow-sm">
+            <span className="inline-flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-sky-500 text-white shadow-sm">
               <Sparkles className="size-4" />
             </span>
-            <span className="text-sm font-semibold tracking-wide text-slate-900">HireFlow 2.0</span>
+            <span className="text-sm font-semibold tracking-wide text-[#f2f3f5]">HireFlow 2.0</span>
           </Link>
-          <nav className="flex max-w-full items-center gap-1.5 overflow-x-auto rounded-2xl border border-slate-200 bg-white/85 p-1.5">
+          <nav className="flex max-w-full items-center gap-1.5 overflow-x-auto rounded-lg border border-[#3a3d44] bg-[#2b2d31]/85 p-1.5">
             {navItems.map((item) => {
               const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
               const Icon = item.icon;
@@ -90,7 +90,7 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
                   href={item.href}
                   className={cn(
                     buttonVariants({ variant: "ghost", size: "sm" }),
-                    "h-9 rounded-xl px-3.5 text-slate-600 transition",
+                    "h-9 rounded-md px-3.5 text-[#b5bac1] transition",
                     isActive && "bg-gradient-to-r from-indigo-500 to-sky-500 text-white hover:text-white"
                   )}
                 >
@@ -103,14 +103,14 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
           <button
             type="button"
             onClick={handleLogout}
-            className={cn(buttonVariants({ variant: "outline", size: "sm" }), "h-9 rounded-xl px-3.5")}
+            className={cn(buttonVariants({ variant: "outline", size: "sm" }), "h-9 rounded-md px-3.5")}
           >
             <LogOut className="size-4" />
             Выход
           </button>
         </div>
         <div className="mx-auto w-full max-w-[1600px] px-4 pb-4 sm:px-6">
-          <p className="text-xs font-medium uppercase tracking-[0.16em] text-slate-500">{sectionTitle}</p>
+          <p className="text-xs font-medium uppercase tracking-[0.16em] text-[#8f95a0]">{sectionTitle}</p>
         </div>
       </header>
       <main className="mx-auto w-full max-w-[1600px] px-4 py-8 sm:px-6">{children}</main>

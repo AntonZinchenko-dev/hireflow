@@ -40,32 +40,14 @@ export default async function JobsPage() {
       ) : (
         <ul className="grid gap-4 lg:grid-cols-2">
           {vacancies.map((vacancy) => {
-            const totalCandidates = vacancy.stages.reduce(
-              (sum, stage) => sum + stage._count.candidates,
-              0
-            );
-
             return (
               <li key={vacancy.id} className="hf-card p-5">
                 <div className="space-y-2">
                   <div className="flex flex-wrap items-center justify-between gap-2">
-                    <h2 className="text-xl font-semibold text-slate-900">{vacancy.title}</h2>
+                    <h2 className="text-xl font-semibold text-[#f2f3f5]">{vacancy.title}</h2>
                     <Badge variant="secondary">{vacancy.department}</Badge>
                   </div>
-                  <p className="text-sm text-slate-500">
-                    Кандидатов в процессе: {totalCandidates} · Этапов: {vacancy.stages.length}
-                  </p>
-                </div>
-                <div className="mt-4 space-y-2">
-                  {vacancy.stages.map((stage) => (
-                    <div
-                      key={stage.id}
-                      className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm"
-                    >
-                      <span className="font-medium text-slate-700">{stage.name}</span>
-                      <span className="text-slate-500">{stage._count.candidates}</span>
-                    </div>
-                  ))}
+                  <p className="text-sm text-[#b5bac1]">Открытая позиция, можно отправить отклик.</p>
                 </div>
                 <div className="mt-4 flex items-center gap-2">
                   <form action={applyToVacancyAction}>
@@ -78,7 +60,7 @@ export default async function JobsPage() {
                           variant: appliedVacancyIds.has(vacancy.id) ? "outline" : "default",
                           size: "sm",
                         }),
-                        "rounded-xl"
+                        "rounded-md"
                       )}
                     >
                       {appliedVacancyIds.has(vacancy.id) ? "Вы уже откликнулись" : "Откликнуться"}

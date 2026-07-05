@@ -146,7 +146,7 @@ export function BoardClient({ vacancy, initialCandidates }: Props) {
       <div className="hf-card p-6 backdrop-blur">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="space-y-2">
-            <h1 className="text-2xl font-semibold tracking-tight text-slate-900">{vacancy.title}</h1>
+            <h1 className="text-2xl font-semibold tracking-tight text-[#f2f3f5]">{vacancy.title}</h1>
             <div className="flex flex-wrap items-center gap-2">
               <Badge variant="secondary">{vacancy.department}</Badge>
               <Badge variant="outline">{vacancy.grade}</Badge>
@@ -154,7 +154,7 @@ export function BoardClient({ vacancy, initialCandidates }: Props) {
                 {vacancy.status === "open" ? "Открыта" : "Закрыта"}
               </Badge>
             </div>
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-[#b5bac1]">
               {activeCandidates} кандидатов в воронке · {stagesCount} этапов найма · SLA risk:{" "}
               {stalledCandidates}
             </p>
@@ -172,7 +172,7 @@ export function BoardClient({ vacancy, initialCandidates }: Props) {
           <select
             value={sourceFilter}
             onChange={(event) => setSourceFilter(event.target.value as "all" | Candidate["source"])}
-            className="h-10 rounded-xl border border-input bg-white px-3 text-sm text-slate-700 outline-none transition focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/40"
+            className="h-10 rounded-xl border border-input bg-[#1a1b1e] px-3 text-sm text-[#f2f3f5] outline-none transition focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/40"
           >
             <option value="all">Все источники</option>
             <option value="site">Сайт</option>
@@ -183,7 +183,7 @@ export function BoardClient({ vacancy, initialCandidates }: Props) {
           <select
             value={gradeFilter}
             onChange={(event) => setGradeFilter(event.target.value as "all" | Candidate["grade"])}
-            className="h-10 rounded-xl border border-input bg-white px-3 text-sm text-slate-700 outline-none transition focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/40"
+            className="h-10 rounded-xl border border-input bg-[#1a1b1e] px-3 text-sm text-[#f2f3f5] outline-none transition focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/40"
           >
             <option value="all">Все грейды</option>
             <option value="junior">Junior</option>
@@ -200,7 +200,7 @@ export function BoardClient({ vacancy, initialCandidates }: Props) {
           </button>
         </div>
         <div className="mt-2 flex items-center justify-between gap-3">
-          <p className="text-xs text-slate-500">Показано: {filteredCandidates.length} из {candidates.length}</p>
+          <p className="text-xs text-[#b5bac1]">Показано: {filteredCandidates.length} из {candidates.length}</p>
           <button
             type="button"
             onClick={resetFilters}

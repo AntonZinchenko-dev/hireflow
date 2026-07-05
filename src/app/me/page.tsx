@@ -20,31 +20,31 @@ export default async function ProfilePage() {
       <form action={updateProfileAction} className="hf-card p-6">
         <div className="grid gap-4 md:grid-cols-2">
           <div className="space-y-1.5 md:col-span-2">
-            <label htmlFor="fullName" className="text-sm font-medium text-slate-700">
+            <label htmlFor="fullName" className="text-sm font-medium text-[#dbdee1]">
               Имя
             </label>
             <Input
               id="fullName"
               name="fullName"
               defaultValue={profile.fullName}
-              className="h-11 rounded-xl"
+              className="h-11 rounded-md"
               required
             />
           </div>
           <div className="space-y-1.5">
-            <label htmlFor="email" className="text-sm font-medium text-slate-700">
+            <label htmlFor="email" className="text-sm font-medium text-[#dbdee1]">
               Email
             </label>
-            <Input id="email" defaultValue={session.user.email ?? ""} readOnly className="h-11 rounded-xl bg-slate-50" />
+            <Input id="email" defaultValue={session.user.email ?? ""} readOnly className="h-11 rounded-md bg-[#232428]" />
           </div>
           <div className="space-y-1.5">
-            <label htmlFor="role" className="text-sm font-medium text-slate-700">
+            <label htmlFor="role" className="text-sm font-medium text-[#dbdee1]">
               Роль
             </label>
-            <Input id="role" defaultValue={profile.role} readOnly className="h-11 rounded-xl bg-slate-50" />
+            <Input id="role" defaultValue={profile.role} readOnly className="h-11 rounded-md bg-[#232428]" />
           </div>
           <div className="space-y-1.5 md:col-span-2">
-            <label htmlFor="headline" className="text-sm font-medium text-slate-700">
+            <label htmlFor="headline" className="text-sm font-medium text-[#dbdee1]">
               Заголовок
             </label>
             <Input
@@ -52,11 +52,11 @@ export default async function ProfilePage() {
               name="headline"
               defaultValue={profile.headline ?? ""}
               placeholder="Например: Frontend Engineer, 4 года опыта"
-              className="h-11 rounded-xl"
+              className="h-11 rounded-md"
             />
           </div>
           <div className="space-y-1.5 md:col-span-2">
-            <label htmlFor="bio" className="text-sm font-medium text-slate-700">
+            <label htmlFor="bio" className="text-sm font-medium text-[#dbdee1]">
               О себе
             </label>
             <Textarea
@@ -64,11 +64,11 @@ export default async function ProfilePage() {
               name="bio"
               defaultValue={profile.bio ?? ""}
               placeholder="Коротко о навыках и интересах"
-              className="rounded-xl"
+              className="rounded-md"
             />
           </div>
         </div>
-        <Button type="submit" className="mt-5 h-11 rounded-xl">
+        <Button type="submit" className="mt-5 h-11 rounded-md">
           Сохранить изменения
         </Button>
       </form>
