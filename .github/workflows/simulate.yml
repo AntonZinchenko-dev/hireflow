@@ -1,0 +1,14 @@
+name: Simulate live activity
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -s -X POST "${{ secrets.SITE_URL }}/api/internal/simulate" \
+            -H "x-simulation-secret: ${{ secrets.SIMULATION_SECRET }}"
