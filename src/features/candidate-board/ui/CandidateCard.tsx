@@ -4,6 +4,15 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useBoardStore } from "../model/useBoardStore";
 import type { Candidate } from "@/entities/candidate/types";
+import { formatMoney } from "@/shared/lib/utils";
+import { Badge } from "@/components/ui/badge";
+
+const sourceLabels = {
+    site: "Сайт",
+    referral: "Реферал",
+    agency: "Агентство",
+    headhunting: "Хедхантинг",
+} as const;
 
 export function CandidateCard({ candidate }: { candidate: Candidate }) {
     const { attributes, listeners, setNodeRef, transform, transition, isDragging
@@ -21,12 +30,16 @@ export function CandidateCard({ candidate }: { candidate: Candidate }) {
             {...attributes}
             {...listeners}
             onClick={() => openDrawer(candidate.id)}
-            className="cursor-grab rounded-md border bg-white p-3 shadow-sm
-hover:border-blue-300 active:cursor-grabbing"
+            className="cursor-grab rounded-xl border border-slate-200 bg-white/95 p-3.5 shadow-sm transition hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-md active:cursor-grabbing"
         >
-            <div className="font-medium text-slate-800">{candidate.fullName}</div>
-            <div className="text-xs text-slate-400">{candidate.grade} ·
-                {candidate.source}</div>
+            <div className="font-medium text-slate-900">{candidate.fullName}</div>
+            <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                <Badge variant="outline">{candidate.grade}</Badge>
+                <Badge variant="secondary">{sourceLabels[candidate.source]}</Badge>
+            </div>
+            <p className="mt-2 text-xs font-medium text-slate-500">
+                Ожидание: {formatMoney(candidate.expectedSalary)}
+            </p>
         </div>
     );
 }

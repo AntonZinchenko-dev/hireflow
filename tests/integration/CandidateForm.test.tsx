@@ -30,6 +30,8 @@ const baseCandidate = {
 
 it("показывает ошибку, если source=referral без referrerName", async () => {
     renderWithProviders(<CandidateForm candidate={baseCandidate}
+        vacancyId="vac_1"
+        defaultStageId="stage_1"
         onSaved={() => { }} />);
     const sourceSelect = screen.getAllByRole("combobox")[0]!;
     await userEvent.selectOptions(sourceSelect, "referral");

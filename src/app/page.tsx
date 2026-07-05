@@ -3,5 +3,10 @@ import { getServerSession } from "@/shared/lib/supabase-server";
 
 export default async function Home() {
   const session = await getServerSession();
-  redirect(session ? "/board" : "/login");
+  if (!session) {
+    redirect("/login");
+  }
+
+  const role = session.user.app_metadata.role as string | undefined;
+  redirect(role === "admin" ? "/vacancies" : "/analytics");
 }

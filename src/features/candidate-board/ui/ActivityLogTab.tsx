@@ -21,10 +21,10 @@ export function ActivityLogTab({ candidateId }: { candidateId: string }) {
     return (
         <ul className="space-y-3">
             {entries.map((entry) => (
-                <li key={entry.id} className="border-l-2 border-slate-200 pl-3 textsm">
+                <li key={entry.id} className="rounded-r-xl border-l-2 border-slate-200 bg-slate-50/70 px-3 py-2 text-sm">
                     <div className="font-medium text-slate-700">
                         {LABELS[entry.type] ?? entry.type}
-                        {entry.actor.isBot && <span className="ml-1 text-xs text-slate400">(бот)</span>}
+                        {entry.actor.isBot && <span className="ml-1 text-xs text-slate-400">(бот)</span>}
                     </div>
                     <div className="text-xs text-slate-400">{entry.actor.name} ·
                         {formatRelativeDate(entry.createdAt.toString())}</div>

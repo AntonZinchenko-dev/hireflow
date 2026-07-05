@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/shared/lib/supabase-client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Sparkles, Target, TimerReset } from "lucide-react";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -34,34 +36,70 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-gradient-to-b from-slate-100 to-slate-50 px-4">
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-sm space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
-      >
-        <div className="space-y-1">
-          <h1 className="text-2xl font-semibold text-slate-900">Вход в HireFlow</h1>
-          <p className="text-sm text-slate-500">Управление воронкой рекрутинга в одном месте.</p>
+    <main className="grid min-h-screen grid-cols-1 bg-transparent lg:grid-cols-[1.05fr_0.95fr]">
+      <section className="relative hidden overflow-hidden border-r border-slate-200/70 bg-gradient-to-br from-indigo-600 via-indigo-500 to-sky-500 p-12 text-white lg:block">
+        <div className="absolute -right-20 -top-20 size-72 rounded-full bg-white/15 blur-3xl" />
+        <div className="absolute -bottom-24 left-0 size-80 rounded-full bg-cyan-300/20 blur-3xl" />
+        <div className="relative space-y-8">
+          <Badge className="w-fit bg-white/15 text-white">Recruiting OS</Badge>
+          <div className="space-y-3">
+            <h1 className="max-w-md text-4xl font-semibold leading-tight">
+              Нанимайте быстрее, а не тяжелее
+            </h1>
+            <p className="max-w-md text-sm text-white/85">
+              HireFlow 2.0 объединяет канбан, профиль кандидата и аналитику конверсии в одном интерфейсе.
+            </p>
+          </div>
+          <div className="space-y-3">
+            <div className="flex items-center gap-3 rounded-2xl bg-white/10 p-3">
+              <Sparkles className="size-4 shrink-0" />
+              <p className="text-sm">Единая доска по всем этапам подбора</p>
+            </div>
+            <div className="flex items-center gap-3 rounded-2xl bg-white/10 p-3">
+              <Target className="size-4 shrink-0" />
+              <p className="text-sm">Прозрачная конверсия и узкие места воронки</p>
+            </div>
+            <div className="flex items-center gap-3 rounded-2xl bg-white/10 p-3">
+              <TimerReset className="size-4 shrink-0" />
+              <p className="text-sm">Меньше ручных апдейтов, больше живой работы</p>
+            </div>
+          </div>
         </div>
-        <Input
-          type="email"
-          placeholder="you@company.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <Input
-          type="password"
-          placeholder="Пароль"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        {error && <p className="text-sm text-red-600">{error}</p>}
-        <Button type="submit" className="w-full" disabled={isPending}>
-          {isPending ? "Входим..." : "Войти"}
-        </Button>
-      </form>
+      </section>
+      <section className="flex items-center justify-center px-6 py-12">
+        <form
+          onSubmit={handleSubmit}
+          className="w-full max-w-md space-y-6 rounded-3xl border border-slate-200/80 bg-white/95 p-8 shadow-[0_20px_50px_-28px_rgba(15,23,42,0.55)]"
+        >
+          <div className="space-y-1">
+            <p className="text-xs font-medium uppercase tracking-[0.16em] text-indigo-600">Welcome back</p>
+            <h2 className="text-3xl font-semibold tracking-tight text-slate-900">Вход в HireFlow</h2>
+            <p className="text-sm text-slate-500">Используйте рабочий аккаунт для доступа к воронке.</p>
+          </div>
+          <div className="space-y-3">
+            <Input
+              type="email"
+              placeholder="you@company.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="h-11 rounded-xl"
+            />
+            <Input
+              type="password"
+              placeholder="Пароль"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="h-11 rounded-xl"
+            />
+          </div>
+          {error && <p className="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
+          <Button type="submit" className="h-11 w-full rounded-xl" disabled={isPending}>
+            {isPending ? "Входим..." : "Войти"}
+          </Button>
+        </form>
+      </section>
     </main>
   );
 }

@@ -41,12 +41,14 @@ export async function middleware(req: NextRequest) {
   }
 
   if (pathname === "/" || pathname === "/login") {
-    return NextResponse.redirect(new URL("/board", req.url));
+    const role = session.user.app_metadata.role as string | undefined;
+    const landingPath = role === "admin" ? "/vacancies" : "/analytics";
+    return NextResponse.redirect(new URL(landingPath, req.url));
   }
 
   const role = session.user.app_metadata.role as string | undefined;
   if (pathname.startsWith("/vacancies") && role !== "admin") {
-    return NextResponse.redirect(new URL("/board", req.url));
+    return NextResponse.redirect(new URL("/analytics", req.url));
   }
 
   return res;

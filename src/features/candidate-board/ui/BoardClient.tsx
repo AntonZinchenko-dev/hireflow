@@ -17,6 +17,7 @@ import type { Candidate } from "@/entities/candidate/types";
 import { CandidateDrawer } from "@/features/candidate-form/ui/CandidateDrawer";
 import { useRealtimeSync } from "../api/useRealtimeSync";
 import { buttonVariants } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 type Props = {
   vacancy: Vacancy & { stages: Stage[] };
@@ -50,31 +51,30 @@ export function BoardClient({ vacancy, initialCandidates }: Props) {
     }
   }
 
+  const activeCandidates = candidates.length;
+  const stagesCount = vacancy.stages.length;
+
   return (
-    <section className="space-y-4">
-      <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <h1 className="text-xl font-semibold text-slate-900">{vacancy.title}</h1>
+    <section className="hf-page">
+      <div className="hf-card p-6 backdrop-blur">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div className="space-y-2">
+            <h1 className="text-2xl font-semibold tracking-tight text-slate-900">{vacancy.title}</h1>
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge variant="secondary">{vacancy.department}</Badge>
+              <Badge variant="outline">{vacancy.grade}</Badge>
+              <Badge variant={vacancy.status === "open" ? "default" : "secondary"}>
+                {vacancy.status === "open" ? "Открыта" : "Закрыта"}
+              </Badge>
+            </div>
             <p className="text-sm text-slate-500">
-              {vacancy.department} · {candidates.length} кандидатов в работе
+              {activeCandidates} кандидатов в воронке · {stagesCount} этапов найма
             </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <Link href="/vacancies" className={buttonVariants({ variant: "outline", size: "sm" })}>
-              К списку вакансий
-            </Link>
-            <Link
-              href="/analytics"
-              className={buttonVariants({ variant: "outline", size: "sm" })}
-            >
-              Смотреть аналитику
-            </Link>
           </div>
         </div>
       </div>
       <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-        <div className="flex min-h-[65vh] gap-4 overflow-x-auto pb-2">
+        <div className="flex min-h-[68vh] gap-5 overflow-x-auto overflow-y-visible px-1 py-2">
           {vacancy.stages.map((stage) => (
             <StageColumn
               key={stage.id}
@@ -84,7 +84,7 @@ export function BoardClient({ vacancy, initialCandidates }: Props) {
           ))}
         </div>
       </DndContext>
-      <CandidateDrawer vacancyId={vacancy.id} />
+      <CandidateDrawer vacancyId={vacancy.id} defaultStageId={vacancy.stages[0]?.id ?? ""} />
     </section>
   );
 }
