@@ -33,6 +33,22 @@ export async function moveCandidateAction(input: {
 
     if (!session) throw new Error("Unauthorized");
 
+    const currentCandidate = await prisma.candidate.findUnique({
+        where: { id: input.candidateId },
+        select: { id: true, vacancyId: true },
+    });
+    if (!currentCandidate) {
+        throw new Error("Candidate not found");
+    }
+
+    const targetStage = await prisma.stage.findUnique({
+        where: { id: input.stageId },
+        select: { id: true, vacancyId: true },
+    });
+    if (!targetStage || targetStage.vacancyId !== currentCandidate.vacancyId) {
+        throw new Error("Invalid target stage");
+    }
+
     const candidate = await prisma.candidate.update({
         where: { id: input.candidateId },
         data: { stageId: input.stageId },

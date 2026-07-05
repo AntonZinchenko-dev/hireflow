@@ -28,9 +28,15 @@ export function BoardClient({ vacancy, initialCandidates }: Props) {
         const { active, over } = event;
         if (!over) return;
         const candidateId = String(active.id);
-        const targetStageId = String(over.id);
+        const overId = String(over.id);
         const current = candidates.find((c) => c.id === candidateId);
-        if (current && current.stageId !== targetStageId) {
+        if (!current) return;
+
+        const targetStageId = vacancy.stages.some((stage) => stage.id === overId)
+            ? overId
+            : candidates.find((c) => c.id === overId)?.stageId;
+
+        if (targetStageId && current.stageId !== targetStageId) {
             moveCandidate({ candidateId, stageId: targetStageId });
         }
     }

@@ -80,6 +80,7 @@ model Interview {
   verdict       String    // hire | no_hire | lean_hire | lean_no_hire
   comment       String?
   createdAt     DateTime  @default(now())
+  criteria Json? // [{ name: string, score: number }]
 
   @@index([candidateId])
 }
