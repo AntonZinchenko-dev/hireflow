@@ -1,6 +1,6 @@
 // src/features/candidate-board/api/actions.ts
 "use server";
-import { prisma } from "@/shared/lib/prisma-client";
+import { prisma, withPrismaRetry } from "@/shared/lib/prisma-client";
 import { getServerSession } from "@/shared/lib/supabase-server";
 import { logActivity } from "@/shared/lib/activity";
 import { cookies } from "next/headers";
@@ -22,10 +22,12 @@ function toCandidateEntity(candidate: PrismaCandidate): Candidate {
 }
 
 export async function getCandidatesAction(vacancyId: string) {
-    const candidates = await prisma.candidate.findMany({
-        where: { vacancyId }, orderBy:
-            { createdAt: "desc" }
-    });
+    const candidates = await withPrismaRetry(() =>
+        prisma.candidate.findMany({
+            where: { vacancyId }, orderBy:
+                { createdAt: "desc" }
+        })
+    );
 
     return candidates.map(toCandidateEntity);
 }

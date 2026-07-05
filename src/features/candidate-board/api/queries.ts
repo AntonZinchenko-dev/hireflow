@@ -10,6 +10,7 @@ export function useCandidates(vacancyId: string, initialData?:
     return useQuery<Candidate[]>({
         queryKey: ["candidates", vacancyId],
         queryFn: () => getCandidatesAction(vacancyId),
+        refetchInterval: process.env.NODE_ENV !== "production" ? 1000 : false,
         ...(initialData !== undefined ? { initialData } : {}),
     });
 }

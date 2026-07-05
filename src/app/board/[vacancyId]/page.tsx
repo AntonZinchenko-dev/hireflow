@@ -1,5 +1,5 @@
 // src/app/board/[vacancyId]/page.tsx
-import { prisma } from "@/shared/lib/prisma-client";
+import { prisma, withPrismaRetry } from "@/shared/lib/prisma-client";
 import { getCandidatesAction } from "@/features/candidate-board/api/actions";
 import { BoardClient } from "@/features/candidate-board/ui/BoardClient";
 import { notFound } from "next/navigation";
@@ -26,10 +26,12 @@ export default async function BoardPage({ params }: {
     Promise<{ vacancyId: string }>
 }) {
     const { vacancyId } = await params;
-    const vacancy = await prisma.vacancy.findUnique({
-        where: { id: vacancyId },
-        include: { stages: { orderBy: { order: "asc" } } },
-    });
+    const vacancy = await withPrismaRetry(() =>
+        prisma.vacancy.findUnique({
+            where: { id: vacancyId },
+            include: { stages: { orderBy: { order: "asc" } } },
+        })
+    );
     if (!vacancy) notFound();
     const candidates = await getCandidatesAction(vacancyId);
     return (

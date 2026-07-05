@@ -40,3 +40,22 @@ export async function resetPrismaClient() {
 
   return prisma;
 }
+
+function isRecoverablePrismaError(error: unknown) {
+  if (!(error instanceof Error)) return false;
+  const message = error.message.toLowerCase();
+  return message.includes("connection terminated unexpectedly")
+    || message.includes("transaction already closed");
+}
+
+export async function withPrismaRetry<T>(operation: () => Promise<T>): Promise<T> {
+  try {
+    return await operation();
+  } catch (error) {
+    if (!isRecoverablePrismaError(error)) {
+      throw error;
+    }
+    await resetPrismaClient();
+    return operation();
+  }
+}
