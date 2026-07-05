@@ -1,9 +1,7 @@
-import { Button } from "@/components/ui/button";
+import { redirect } from "next/navigation";
+import { getServerSession } from "@/shared/lib/supabase-server";
 
-export default function Home() {
-  return (
-    <main className="flex min-h-screen items-center justify-center">
-      <Button>HireFlow UI Kit готов</Button>
-    </main>
-  );
+export default async function Home() {
+  const session = await getServerSession();
+  redirect(session ? "/board" : "/login");
 }

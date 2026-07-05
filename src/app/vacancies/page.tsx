@@ -14,27 +14,40 @@ type VacancyListItem = {
 };
 
 export default async function VacanciesPage() {
-    const vacancies: VacancyListItem[] = await getVacancies();
-    return (
-        <main className="mx-auto max-w-3xl p-8">
-            <div className="mb-6 flex items-center justify-between">
-                <h1 className="text-2xl font-bold text-slate-800">Вакансии</h1>
-                <Link href="/vacancies/new" className={buttonVariants()}>
-                    Создать вакансию
-                </Link>
-            </div>
-            <ul className="space-y-3">
-                {vacancies.map((v) => (
-                    <li key={v.id}>
-                        <Link href={`/board/${v.id}`}
-                            className="block rounded-lg border p-4 hover:bg-slate-50">
-                            <div className="font-semibold text-slate-800">{v.title}</div>
-                            <div className="text-sm text-slate-500">{v.department} ·
-                                {v._count.candidates} кандидатов</div>
-                        </Link>
-                    </li>
-                ))}
-            </ul>
-        </main>
-    );
+  const vacancies: VacancyListItem[] = await getVacancies();
+
+  return (
+    <section className="space-y-5">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-semibold text-slate-900">Вакансии</h1>
+          <p className="text-sm text-slate-500">Управляйте позициями и переходите в доску кандидатов.</p>
+        </div>
+        <Link href="/vacancies/new" className={buttonVariants()}>
+          Создать вакансию
+        </Link>
+      </div>
+      {vacancies.length === 0 ? (
+        <div className="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-sm text-slate-500">
+          Пока нет вакансий. Создайте первую, чтобы начать работу с доской и аналитикой.
+        </div>
+      ) : (
+        <ul className="grid gap-3 md:grid-cols-2">
+          {vacancies.map((v) => (
+            <li key={v.id}>
+              <Link
+                href={`/board/${v.id}`}
+                className="block rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow"
+              >
+                <div className="font-semibold text-slate-900">{v.title}</div>
+                <div className="mt-1 text-sm text-slate-500">
+                  {v.department} · {v._count.candidates} кандидатов
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  );
 }
