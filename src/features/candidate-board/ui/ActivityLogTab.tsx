@@ -2,6 +2,7 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import { getActivityLog } from "../api/getActivityLog";
+import type { ActivityLogEntry } from "../api/getActivityLog";
 import { formatRelativeDate } from "@/shared/lib/utils";
 
 const LABELS: Record<string, string> = {
@@ -13,7 +14,7 @@ const LABELS: Record<string, string> = {
 };
 
 export function ActivityLogTab({ candidateId }: { candidateId: string }) {
-    const { data: entries = [] } = useQuery({
+    const { data: entries = [] } = useQuery<ActivityLogEntry[]>({
         queryKey: ["activity", candidateId],
         queryFn: () => getActivityLog(candidateId),
     });
