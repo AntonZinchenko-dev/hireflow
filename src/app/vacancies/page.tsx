@@ -4,8 +4,17 @@ import Link from "next/link";
 import { getVacancies } from "@/features/vacancy-list/api/actions";
 import { buttonVariants } from "@/components/ui/button";
 
+type VacancyListItem = {
+    id: string;
+    title: string;
+    department: string;
+    _count: {
+        candidates: number;
+    };
+};
+
 export default async function VacanciesPage() {
-    const vacancies = await getVacancies();
+    const vacancies: VacancyListItem[] = await getVacancies();
     return (
         <main className="mx-auto max-w-3xl p-8">
             <div className="mb-6 flex items-center justify-between">
