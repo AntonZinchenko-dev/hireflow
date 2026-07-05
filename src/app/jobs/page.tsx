@@ -1,11 +1,22 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { prisma } from "@/shared/lib/prisma-client";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { applyToVacancyAction, getOrCreateProfile } from "@/features/account/api/actions";
 import { cn } from "@/shared/lib/utils";
+import { getServerSession } from "@/shared/lib/supabase-server";
+import { resolveAppRole } from "@/shared/lib/auth-role";
 
 export default async function JobsPage() {
+  const session = await getServerSession();
+  if (!session) {
+    redirect("/login");
+  }
+  if (resolveAppRole(session.user) !== "candidate") {
+    redirect("/vacancies");
+  }
+
   const profile = await getOrCreateProfile();
   const vacancies = await prisma.vacancy.findMany({
     where: { status: "open" },

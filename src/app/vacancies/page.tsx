@@ -1,8 +1,11 @@
 // src/app/vacancies/page.tsx
 
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { getVacancies } from "@/features/vacancy-list/api/actions";
 import { buttonVariants } from "@/components/ui/button";
+import { getServerSession } from "@/shared/lib/supabase-server";
+import { resolveAppRole } from "@/shared/lib/auth-role";
 
 type VacancyListItem = {
     id: string;
@@ -14,6 +17,14 @@ type VacancyListItem = {
 };
 
 export default async function VacanciesPage() {
+  const session = await getServerSession();
+  if (!session) {
+    redirect("/login");
+  }
+  if (resolveAppRole(session.user) !== "employer") {
+    redirect("/jobs");
+  }
+
   const vacancies: VacancyListItem[] = await getVacancies();
   const totalCandidates = vacancies.reduce((sum, vacancy) => sum + vacancy._count.candidates, 0);
 

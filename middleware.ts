@@ -7,7 +7,8 @@ export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
   const isE2EBypass =
     process.env.NODE_ENV !== "production" &&
-    req.cookies.get("e2e-bypass")?.value === "1";
+    req.cookies.get("e2e-bypass")?.value === "1" &&
+    pathname.startsWith("/board");
 
   if (isE2EBypass) {
     return res;
@@ -64,5 +65,19 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/login", "/register", "/board/:path*", "/vacancies/:path*", "/analytics/:path*", "/jobs/:path*", "/me/:path*"],
+  matcher: [
+    "/",
+    "/login",
+    "/register",
+    "/board",
+    "/board/:path*",
+    "/vacancies",
+    "/vacancies/:path*",
+    "/analytics",
+    "/analytics/:path*",
+    "/jobs",
+    "/jobs/:path*",
+    "/me",
+    "/me/:path*",
+  ],
 };

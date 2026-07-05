@@ -1,10 +1,13 @@
 // src/app/analytics/page.tsx
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { prisma } from "@/shared/lib/prisma-client";
 import { getAggregateFunnelData, getFunnelData } from
     "@/features/analytics-dashboard/api/getFunnelData";
 import { FunnelChart } from "@/features/analytics-dashboard/ui/FunnelChart";
 import { buttonVariants } from "@/components/ui/button";
+import { getServerSession } from "@/shared/lib/supabase-server";
+import { resolveAppRole } from "@/shared/lib/auth-role";
 
 type AnalyticsPageProps = {
     searchParams?: Promise<{
@@ -15,6 +18,14 @@ type AnalyticsPageProps = {
 export const dynamic = "force-dynamic";
 
 export default async function AnalyticsPage({ searchParams }: AnalyticsPageProps) {
+    const session = await getServerSession();
+    if (!session) {
+        redirect("/login");
+    }
+    if (resolveAppRole(session.user) !== "employer") {
+        redirect("/jobs");
+    }
+
     const resolvedSearchParams = await searchParams;
     const vacancies = await prisma.vacancy.findMany({
         orderBy: {

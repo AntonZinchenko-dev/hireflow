@@ -1,12 +1,19 @@
+import { redirect } from "next/navigation";
 import { getServerSession } from "@/shared/lib/supabase-server";
 import { getOrCreateProfile, updateProfileAction } from "@/features/account/api/actions";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { resolveAppRole } from "@/shared/lib/auth-role";
 
 export default async function ProfilePage() {
   const session = await getServerSession();
-  if (!session) return null;
+  if (!session) {
+    redirect("/login");
+  }
+  if (resolveAppRole(session.user) !== "candidate") {
+    redirect("/vacancies");
+  }
 
   const profile = await getOrCreateProfile();
 
