@@ -1,6 +1,6 @@
 import "dotenv/config";
-import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "../../../prisma/generated";
 
 const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
 // Use pooled runtime URL first; DIRECT_URL is mainly for migrations/CLI.
