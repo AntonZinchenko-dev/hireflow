@@ -20,6 +20,19 @@ model User {
   activityLog ActivityLog[]
 }
 
+model PortalProfile {
+  id           String      @id @default(cuid())
+  authUserId   String      @unique
+  email        String
+  fullName     String
+  role         String      @default("candidate") // employer | candidate
+  headline     String?
+  bio          String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  applications Candidate[]
+}
+
 model Vacancy {
   id         String      @id @default(cuid())
   title      String
@@ -43,11 +56,11 @@ model Stage {
 }
 
 model Candidate {
-  id                    String        @id @default(cuid())
+  id                    String         @id @default(cuid())
   vacancyId             String
-  vacancy               Vacancy       @relation(fields: [vacancyId], references: [id], onDelete: Cascade)
+  vacancy               Vacancy        @relation(fields: [vacancyId], references: [id], onDelete: Cascade)
   stageId               String
-  stage                 Stage         @relation(fields: [stageId], references: [id])
+  stage                 Stage          @relation(fields: [stageId], references: [id])
   fullName              String
   source                String // site | referral | agency | headhunting
   referrerName          String?
@@ -58,15 +71,19 @@ model Candidate {
   offerDeadline         DateTime?
   resumeUrl             String?
   assignedRecruiterId   String
-  assignedRecruiter     User          @relation("AssignedRecruiter", fields: [assignedRecruiterId], references: [id])
-  createdAt             DateTime      @default(now())
-  updatedAt             DateTime      @updatedAt
+  assignedRecruiter     User           @relation("AssignedRecruiter", fields: [assignedRecruiterId], references: [id])
+  portalProfileId       String?
+  portalProfile         PortalProfile? @relation(fields: [portalProfileId], references: [id], onDelete: SetNull)
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
   interviews            Interview[]
   comments              Comment[]
   activity              ActivityLog[]
 
+  @@unique([vacancyId, portalProfileId])
   @@index([vacancyId])
   @@index([stageId])
+  @@index([portalProfileId])
 }
 
 model Interview {

@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
+import { resolveAppRole } from "@/shared/lib/auth-role";
 
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
@@ -36,24 +37,32 @@ export async function middleware(req: NextRequest) {
   } = await supabase.auth.getSession();
 
   if (!session) {
-    if (pathname === "/login") return res;
+    if (pathname === "/login" || pathname === "/register") return res;
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  if (pathname === "/" || pathname === "/login") {
-    const role = session.user.app_metadata.role as string | undefined;
-    const landingPath = role === "admin" ? "/vacancies" : "/analytics";
+  const role = resolveAppRole(session.user);
+
+  if (pathname === "/" || pathname === "/login" || pathname === "/register") {
+    const landingPath = role === "employer" ? "/vacancies" : "/jobs";
     return NextResponse.redirect(new URL(landingPath, req.url));
   }
 
-  const role = session.user.app_metadata.role as string | undefined;
-  if (pathname.startsWith("/vacancies") && role !== "admin") {
-    return NextResponse.redirect(new URL("/analytics", req.url));
+  if (role !== "employer" && (pathname.startsWith("/vacancies") || pathname.startsWith("/board") || pathname.startsWith("/analytics"))) {
+    return NextResponse.redirect(new URL("/jobs", req.url));
+  }
+
+  if (role !== "candidate" && (pathname.startsWith("/jobs") || pathname.startsWith("/me"))) {
+    return NextResponse.redirect(new URL("/vacancies", req.url));
+  }
+
+  if (role === "candidate" && pathname.startsWith("/jobs/")) {
+    return NextResponse.redirect(new URL("/jobs", req.url));
   }
 
   return res;
 }
 
 export const config = {
-  matcher: ["/", "/login", "/board/:path*", "/vacancies/:path*", "/analytics/:path*"],
+  matcher: ["/", "/login", "/register", "/board/:path*", "/vacancies/:path*", "/analytics/:path*", "/jobs/:path*", "/me/:path*"],
 };

@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model PortalProfile
+ * 
+ */
+export type PortalProfile = $Result.DefaultSelection<Prisma.$PortalProfilePayload>
+/**
  * Model Vacancy
  * 
  */
@@ -179,6 +184,16 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.portalProfile`: Exposes CRUD operations for the **PortalProfile** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PortalProfiles
+    * const portalProfiles = await prisma.portalProfile.findMany()
+    * ```
+    */
+  get portalProfile(): Prisma.PortalProfileDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.vacancy`: Exposes CRUD operations for the **Vacancy** model.
@@ -674,6 +689,7 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
+    PortalProfile: 'PortalProfile',
     Vacancy: 'Vacancy',
     Stage: 'Stage',
     Candidate: 'Candidate',
@@ -695,7 +711,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "vacancy" | "stage" | "candidate" | "interview" | "comment" | "activityLog"
+      modelProps: "user" | "portalProfile" | "vacancy" | "stage" | "candidate" | "interview" | "comment" | "activityLog"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -770,6 +786,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      PortalProfile: {
+        payload: Prisma.$PortalProfilePayload<ExtArgs>
+        fields: Prisma.PortalProfileFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PortalProfileFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortalProfilePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PortalProfileFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortalProfilePayload>
+          }
+          findFirst: {
+            args: Prisma.PortalProfileFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortalProfilePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PortalProfileFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortalProfilePayload>
+          }
+          findMany: {
+            args: Prisma.PortalProfileFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortalProfilePayload>[]
+          }
+          create: {
+            args: Prisma.PortalProfileCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortalProfilePayload>
+          }
+          createMany: {
+            args: Prisma.PortalProfileCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PortalProfileCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortalProfilePayload>[]
+          }
+          delete: {
+            args: Prisma.PortalProfileDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortalProfilePayload>
+          }
+          update: {
+            args: Prisma.PortalProfileUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortalProfilePayload>
+          }
+          deleteMany: {
+            args: Prisma.PortalProfileDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PortalProfileUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PortalProfileUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortalProfilePayload>[]
+          }
+          upsert: {
+            args: Prisma.PortalProfileUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PortalProfilePayload>
+          }
+          aggregate: {
+            args: Prisma.PortalProfileAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePortalProfile>
+          }
+          groupBy: {
+            args: Prisma.PortalProfileGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PortalProfileGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PortalProfileCountArgs<ExtArgs>
+            result: $Utils.Optional<PortalProfileCountAggregateOutputType> | number
           }
         }
       }
@@ -1326,6 +1416,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    portalProfile?: PortalProfileOmit
     vacancy?: VacancyOmit
     stage?: StageOmit
     candidate?: CandidateOmit
@@ -1462,6 +1553,37 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountActivityLogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ActivityLogWhereInput
+  }
+
+
+  /**
+   * Count Type PortalProfileCountOutputType
+   */
+
+  export type PortalProfileCountOutputType = {
+    applications: number
+  }
+
+  export type PortalProfileCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    applications?: boolean | PortalProfileCountOutputTypeCountApplicationsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PortalProfileCountOutputType without action
+   */
+  export type PortalProfileCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortalProfileCountOutputType
+     */
+    select?: PortalProfileCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PortalProfileCountOutputType without action
+   */
+  export type PortalProfileCountOutputTypeCountApplicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CandidateWhereInput
   }
 
 
@@ -2758,6 +2880,1133 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PortalProfile
+   */
+
+  export type AggregatePortalProfile = {
+    _count: PortalProfileCountAggregateOutputType | null
+    _min: PortalProfileMinAggregateOutputType | null
+    _max: PortalProfileMaxAggregateOutputType | null
+  }
+
+  export type PortalProfileMinAggregateOutputType = {
+    id: string | null
+    authUserId: string | null
+    email: string | null
+    fullName: string | null
+    role: string | null
+    headline: string | null
+    bio: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PortalProfileMaxAggregateOutputType = {
+    id: string | null
+    authUserId: string | null
+    email: string | null
+    fullName: string | null
+    role: string | null
+    headline: string | null
+    bio: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PortalProfileCountAggregateOutputType = {
+    id: number
+    authUserId: number
+    email: number
+    fullName: number
+    role: number
+    headline: number
+    bio: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PortalProfileMinAggregateInputType = {
+    id?: true
+    authUserId?: true
+    email?: true
+    fullName?: true
+    role?: true
+    headline?: true
+    bio?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PortalProfileMaxAggregateInputType = {
+    id?: true
+    authUserId?: true
+    email?: true
+    fullName?: true
+    role?: true
+    headline?: true
+    bio?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PortalProfileCountAggregateInputType = {
+    id?: true
+    authUserId?: true
+    email?: true
+    fullName?: true
+    role?: true
+    headline?: true
+    bio?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PortalProfileAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PortalProfile to aggregate.
+     */
+    where?: PortalProfileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PortalProfiles to fetch.
+     */
+    orderBy?: PortalProfileOrderByWithRelationInput | PortalProfileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PortalProfileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PortalProfiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PortalProfiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PortalProfiles
+    **/
+    _count?: true | PortalProfileCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PortalProfileMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PortalProfileMaxAggregateInputType
+  }
+
+  export type GetPortalProfileAggregateType<T extends PortalProfileAggregateArgs> = {
+        [P in keyof T & keyof AggregatePortalProfile]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePortalProfile[P]>
+      : GetScalarType<T[P], AggregatePortalProfile[P]>
+  }
+
+
+
+
+  export type PortalProfileGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PortalProfileWhereInput
+    orderBy?: PortalProfileOrderByWithAggregationInput | PortalProfileOrderByWithAggregationInput[]
+    by: PortalProfileScalarFieldEnum[] | PortalProfileScalarFieldEnum
+    having?: PortalProfileScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PortalProfileCountAggregateInputType | true
+    _min?: PortalProfileMinAggregateInputType
+    _max?: PortalProfileMaxAggregateInputType
+  }
+
+  export type PortalProfileGroupByOutputType = {
+    id: string
+    authUserId: string
+    email: string
+    fullName: string
+    role: string
+    headline: string | null
+    bio: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: PortalProfileCountAggregateOutputType | null
+    _min: PortalProfileMinAggregateOutputType | null
+    _max: PortalProfileMaxAggregateOutputType | null
+  }
+
+  type GetPortalProfileGroupByPayload<T extends PortalProfileGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PortalProfileGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PortalProfileGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PortalProfileGroupByOutputType[P]>
+            : GetScalarType<T[P], PortalProfileGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PortalProfileSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    authUserId?: boolean
+    email?: boolean
+    fullName?: boolean
+    role?: boolean
+    headline?: boolean
+    bio?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    applications?: boolean | PortalProfile$applicationsArgs<ExtArgs>
+    _count?: boolean | PortalProfileCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["portalProfile"]>
+
+  export type PortalProfileSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    authUserId?: boolean
+    email?: boolean
+    fullName?: boolean
+    role?: boolean
+    headline?: boolean
+    bio?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["portalProfile"]>
+
+  export type PortalProfileSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    authUserId?: boolean
+    email?: boolean
+    fullName?: boolean
+    role?: boolean
+    headline?: boolean
+    bio?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["portalProfile"]>
+
+  export type PortalProfileSelectScalar = {
+    id?: boolean
+    authUserId?: boolean
+    email?: boolean
+    fullName?: boolean
+    role?: boolean
+    headline?: boolean
+    bio?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PortalProfileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "authUserId" | "email" | "fullName" | "role" | "headline" | "bio" | "createdAt" | "updatedAt", ExtArgs["result"]["portalProfile"]>
+  export type PortalProfileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    applications?: boolean | PortalProfile$applicationsArgs<ExtArgs>
+    _count?: boolean | PortalProfileCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PortalProfileIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type PortalProfileIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $PortalProfilePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PortalProfile"
+    objects: {
+      applications: Prisma.$CandidatePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      authUserId: string
+      email: string
+      fullName: string
+      role: string
+      headline: string | null
+      bio: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["portalProfile"]>
+    composites: {}
+  }
+
+  type PortalProfileGetPayload<S extends boolean | null | undefined | PortalProfileDefaultArgs> = $Result.GetResult<Prisma.$PortalProfilePayload, S>
+
+  type PortalProfileCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PortalProfileFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PortalProfileCountAggregateInputType | true
+    }
+
+  export interface PortalProfileDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PortalProfile'], meta: { name: 'PortalProfile' } }
+    /**
+     * Find zero or one PortalProfile that matches the filter.
+     * @param {PortalProfileFindUniqueArgs} args - Arguments to find a PortalProfile
+     * @example
+     * // Get one PortalProfile
+     * const portalProfile = await prisma.portalProfile.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PortalProfileFindUniqueArgs>(args: SelectSubset<T, PortalProfileFindUniqueArgs<ExtArgs>>): Prisma__PortalProfileClient<$Result.GetResult<Prisma.$PortalProfilePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PortalProfile that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PortalProfileFindUniqueOrThrowArgs} args - Arguments to find a PortalProfile
+     * @example
+     * // Get one PortalProfile
+     * const portalProfile = await prisma.portalProfile.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PortalProfileFindUniqueOrThrowArgs>(args: SelectSubset<T, PortalProfileFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PortalProfileClient<$Result.GetResult<Prisma.$PortalProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PortalProfile that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PortalProfileFindFirstArgs} args - Arguments to find a PortalProfile
+     * @example
+     * // Get one PortalProfile
+     * const portalProfile = await prisma.portalProfile.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PortalProfileFindFirstArgs>(args?: SelectSubset<T, PortalProfileFindFirstArgs<ExtArgs>>): Prisma__PortalProfileClient<$Result.GetResult<Prisma.$PortalProfilePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PortalProfile that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PortalProfileFindFirstOrThrowArgs} args - Arguments to find a PortalProfile
+     * @example
+     * // Get one PortalProfile
+     * const portalProfile = await prisma.portalProfile.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PortalProfileFindFirstOrThrowArgs>(args?: SelectSubset<T, PortalProfileFindFirstOrThrowArgs<ExtArgs>>): Prisma__PortalProfileClient<$Result.GetResult<Prisma.$PortalProfilePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PortalProfiles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PortalProfileFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PortalProfiles
+     * const portalProfiles = await prisma.portalProfile.findMany()
+     * 
+     * // Get first 10 PortalProfiles
+     * const portalProfiles = await prisma.portalProfile.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const portalProfileWithIdOnly = await prisma.portalProfile.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PortalProfileFindManyArgs>(args?: SelectSubset<T, PortalProfileFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PortalProfilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PortalProfile.
+     * @param {PortalProfileCreateArgs} args - Arguments to create a PortalProfile.
+     * @example
+     * // Create one PortalProfile
+     * const PortalProfile = await prisma.portalProfile.create({
+     *   data: {
+     *     // ... data to create a PortalProfile
+     *   }
+     * })
+     * 
+     */
+    create<T extends PortalProfileCreateArgs>(args: SelectSubset<T, PortalProfileCreateArgs<ExtArgs>>): Prisma__PortalProfileClient<$Result.GetResult<Prisma.$PortalProfilePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PortalProfiles.
+     * @param {PortalProfileCreateManyArgs} args - Arguments to create many PortalProfiles.
+     * @example
+     * // Create many PortalProfiles
+     * const portalProfile = await prisma.portalProfile.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PortalProfileCreateManyArgs>(args?: SelectSubset<T, PortalProfileCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PortalProfiles and returns the data saved in the database.
+     * @param {PortalProfileCreateManyAndReturnArgs} args - Arguments to create many PortalProfiles.
+     * @example
+     * // Create many PortalProfiles
+     * const portalProfile = await prisma.portalProfile.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PortalProfiles and only return the `id`
+     * const portalProfileWithIdOnly = await prisma.portalProfile.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PortalProfileCreateManyAndReturnArgs>(args?: SelectSubset<T, PortalProfileCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PortalProfilePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PortalProfile.
+     * @param {PortalProfileDeleteArgs} args - Arguments to delete one PortalProfile.
+     * @example
+     * // Delete one PortalProfile
+     * const PortalProfile = await prisma.portalProfile.delete({
+     *   where: {
+     *     // ... filter to delete one PortalProfile
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PortalProfileDeleteArgs>(args: SelectSubset<T, PortalProfileDeleteArgs<ExtArgs>>): Prisma__PortalProfileClient<$Result.GetResult<Prisma.$PortalProfilePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PortalProfile.
+     * @param {PortalProfileUpdateArgs} args - Arguments to update one PortalProfile.
+     * @example
+     * // Update one PortalProfile
+     * const portalProfile = await prisma.portalProfile.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PortalProfileUpdateArgs>(args: SelectSubset<T, PortalProfileUpdateArgs<ExtArgs>>): Prisma__PortalProfileClient<$Result.GetResult<Prisma.$PortalProfilePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PortalProfiles.
+     * @param {PortalProfileDeleteManyArgs} args - Arguments to filter PortalProfiles to delete.
+     * @example
+     * // Delete a few PortalProfiles
+     * const { count } = await prisma.portalProfile.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PortalProfileDeleteManyArgs>(args?: SelectSubset<T, PortalProfileDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PortalProfiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PortalProfileUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PortalProfiles
+     * const portalProfile = await prisma.portalProfile.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PortalProfileUpdateManyArgs>(args: SelectSubset<T, PortalProfileUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PortalProfiles and returns the data updated in the database.
+     * @param {PortalProfileUpdateManyAndReturnArgs} args - Arguments to update many PortalProfiles.
+     * @example
+     * // Update many PortalProfiles
+     * const portalProfile = await prisma.portalProfile.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PortalProfiles and only return the `id`
+     * const portalProfileWithIdOnly = await prisma.portalProfile.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PortalProfileUpdateManyAndReturnArgs>(args: SelectSubset<T, PortalProfileUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PortalProfilePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PortalProfile.
+     * @param {PortalProfileUpsertArgs} args - Arguments to update or create a PortalProfile.
+     * @example
+     * // Update or create a PortalProfile
+     * const portalProfile = await prisma.portalProfile.upsert({
+     *   create: {
+     *     // ... data to create a PortalProfile
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PortalProfile we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PortalProfileUpsertArgs>(args: SelectSubset<T, PortalProfileUpsertArgs<ExtArgs>>): Prisma__PortalProfileClient<$Result.GetResult<Prisma.$PortalProfilePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PortalProfiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PortalProfileCountArgs} args - Arguments to filter PortalProfiles to count.
+     * @example
+     * // Count the number of PortalProfiles
+     * const count = await prisma.portalProfile.count({
+     *   where: {
+     *     // ... the filter for the PortalProfiles we want to count
+     *   }
+     * })
+    **/
+    count<T extends PortalProfileCountArgs>(
+      args?: Subset<T, PortalProfileCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PortalProfileCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PortalProfile.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PortalProfileAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PortalProfileAggregateArgs>(args: Subset<T, PortalProfileAggregateArgs>): Prisma.PrismaPromise<GetPortalProfileAggregateType<T>>
+
+    /**
+     * Group by PortalProfile.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PortalProfileGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PortalProfileGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PortalProfileGroupByArgs['orderBy'] }
+        : { orderBy?: PortalProfileGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PortalProfileGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPortalProfileGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PortalProfile model
+   */
+  readonly fields: PortalProfileFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PortalProfile.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PortalProfileClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    applications<T extends PortalProfile$applicationsArgs<ExtArgs> = {}>(args?: Subset<T, PortalProfile$applicationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CandidatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PortalProfile model
+   */
+  interface PortalProfileFieldRefs {
+    readonly id: FieldRef<"PortalProfile", 'String'>
+    readonly authUserId: FieldRef<"PortalProfile", 'String'>
+    readonly email: FieldRef<"PortalProfile", 'String'>
+    readonly fullName: FieldRef<"PortalProfile", 'String'>
+    readonly role: FieldRef<"PortalProfile", 'String'>
+    readonly headline: FieldRef<"PortalProfile", 'String'>
+    readonly bio: FieldRef<"PortalProfile", 'String'>
+    readonly createdAt: FieldRef<"PortalProfile", 'DateTime'>
+    readonly updatedAt: FieldRef<"PortalProfile", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PortalProfile findUnique
+   */
+  export type PortalProfileFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortalProfile
+     */
+    select?: PortalProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortalProfile
+     */
+    omit?: PortalProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortalProfileInclude<ExtArgs> | null
+    /**
+     * Filter, which PortalProfile to fetch.
+     */
+    where: PortalProfileWhereUniqueInput
+  }
+
+  /**
+   * PortalProfile findUniqueOrThrow
+   */
+  export type PortalProfileFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortalProfile
+     */
+    select?: PortalProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortalProfile
+     */
+    omit?: PortalProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortalProfileInclude<ExtArgs> | null
+    /**
+     * Filter, which PortalProfile to fetch.
+     */
+    where: PortalProfileWhereUniqueInput
+  }
+
+  /**
+   * PortalProfile findFirst
+   */
+  export type PortalProfileFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortalProfile
+     */
+    select?: PortalProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortalProfile
+     */
+    omit?: PortalProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortalProfileInclude<ExtArgs> | null
+    /**
+     * Filter, which PortalProfile to fetch.
+     */
+    where?: PortalProfileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PortalProfiles to fetch.
+     */
+    orderBy?: PortalProfileOrderByWithRelationInput | PortalProfileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PortalProfiles.
+     */
+    cursor?: PortalProfileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PortalProfiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PortalProfiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PortalProfiles.
+     */
+    distinct?: PortalProfileScalarFieldEnum | PortalProfileScalarFieldEnum[]
+  }
+
+  /**
+   * PortalProfile findFirstOrThrow
+   */
+  export type PortalProfileFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortalProfile
+     */
+    select?: PortalProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortalProfile
+     */
+    omit?: PortalProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortalProfileInclude<ExtArgs> | null
+    /**
+     * Filter, which PortalProfile to fetch.
+     */
+    where?: PortalProfileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PortalProfiles to fetch.
+     */
+    orderBy?: PortalProfileOrderByWithRelationInput | PortalProfileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PortalProfiles.
+     */
+    cursor?: PortalProfileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PortalProfiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PortalProfiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PortalProfiles.
+     */
+    distinct?: PortalProfileScalarFieldEnum | PortalProfileScalarFieldEnum[]
+  }
+
+  /**
+   * PortalProfile findMany
+   */
+  export type PortalProfileFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortalProfile
+     */
+    select?: PortalProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortalProfile
+     */
+    omit?: PortalProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortalProfileInclude<ExtArgs> | null
+    /**
+     * Filter, which PortalProfiles to fetch.
+     */
+    where?: PortalProfileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PortalProfiles to fetch.
+     */
+    orderBy?: PortalProfileOrderByWithRelationInput | PortalProfileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PortalProfiles.
+     */
+    cursor?: PortalProfileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PortalProfiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PortalProfiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PortalProfiles.
+     */
+    distinct?: PortalProfileScalarFieldEnum | PortalProfileScalarFieldEnum[]
+  }
+
+  /**
+   * PortalProfile create
+   */
+  export type PortalProfileCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortalProfile
+     */
+    select?: PortalProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortalProfile
+     */
+    omit?: PortalProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortalProfileInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PortalProfile.
+     */
+    data: XOR<PortalProfileCreateInput, PortalProfileUncheckedCreateInput>
+  }
+
+  /**
+   * PortalProfile createMany
+   */
+  export type PortalProfileCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PortalProfiles.
+     */
+    data: PortalProfileCreateManyInput | PortalProfileCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PortalProfile createManyAndReturn
+   */
+  export type PortalProfileCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortalProfile
+     */
+    select?: PortalProfileSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortalProfile
+     */
+    omit?: PortalProfileOmit<ExtArgs> | null
+    /**
+     * The data used to create many PortalProfiles.
+     */
+    data: PortalProfileCreateManyInput | PortalProfileCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PortalProfile update
+   */
+  export type PortalProfileUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortalProfile
+     */
+    select?: PortalProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortalProfile
+     */
+    omit?: PortalProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortalProfileInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PortalProfile.
+     */
+    data: XOR<PortalProfileUpdateInput, PortalProfileUncheckedUpdateInput>
+    /**
+     * Choose, which PortalProfile to update.
+     */
+    where: PortalProfileWhereUniqueInput
+  }
+
+  /**
+   * PortalProfile updateMany
+   */
+  export type PortalProfileUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PortalProfiles.
+     */
+    data: XOR<PortalProfileUpdateManyMutationInput, PortalProfileUncheckedUpdateManyInput>
+    /**
+     * Filter which PortalProfiles to update
+     */
+    where?: PortalProfileWhereInput
+    /**
+     * Limit how many PortalProfiles to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PortalProfile updateManyAndReturn
+   */
+  export type PortalProfileUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortalProfile
+     */
+    select?: PortalProfileSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortalProfile
+     */
+    omit?: PortalProfileOmit<ExtArgs> | null
+    /**
+     * The data used to update PortalProfiles.
+     */
+    data: XOR<PortalProfileUpdateManyMutationInput, PortalProfileUncheckedUpdateManyInput>
+    /**
+     * Filter which PortalProfiles to update
+     */
+    where?: PortalProfileWhereInput
+    /**
+     * Limit how many PortalProfiles to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PortalProfile upsert
+   */
+  export type PortalProfileUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortalProfile
+     */
+    select?: PortalProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortalProfile
+     */
+    omit?: PortalProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortalProfileInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PortalProfile to update in case it exists.
+     */
+    where: PortalProfileWhereUniqueInput
+    /**
+     * In case the PortalProfile found by the `where` argument doesn't exist, create a new PortalProfile with this data.
+     */
+    create: XOR<PortalProfileCreateInput, PortalProfileUncheckedCreateInput>
+    /**
+     * In case the PortalProfile was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PortalProfileUpdateInput, PortalProfileUncheckedUpdateInput>
+  }
+
+  /**
+   * PortalProfile delete
+   */
+  export type PortalProfileDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortalProfile
+     */
+    select?: PortalProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortalProfile
+     */
+    omit?: PortalProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortalProfileInclude<ExtArgs> | null
+    /**
+     * Filter which PortalProfile to delete.
+     */
+    where: PortalProfileWhereUniqueInput
+  }
+
+  /**
+   * PortalProfile deleteMany
+   */
+  export type PortalProfileDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PortalProfiles to delete
+     */
+    where?: PortalProfileWhereInput
+    /**
+     * Limit how many PortalProfiles to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PortalProfile.applications
+   */
+  export type PortalProfile$applicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Candidate
+     */
+    select?: CandidateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Candidate
+     */
+    omit?: CandidateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CandidateInclude<ExtArgs> | null
+    where?: CandidateWhereInput
+    orderBy?: CandidateOrderByWithRelationInput | CandidateOrderByWithRelationInput[]
+    cursor?: CandidateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CandidateScalarFieldEnum | CandidateScalarFieldEnum[]
+  }
+
+  /**
+   * PortalProfile without action
+   */
+  export type PortalProfileDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortalProfile
+     */
+    select?: PortalProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortalProfile
+     */
+    omit?: PortalProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortalProfileInclude<ExtArgs> | null
   }
 
 
@@ -5027,6 +6276,7 @@ export namespace Prisma {
     offerDeadline: Date | null
     resumeUrl: string | null
     assignedRecruiterId: string | null
+    portalProfileId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5045,6 +6295,7 @@ export namespace Prisma {
     offerDeadline: Date | null
     resumeUrl: string | null
     assignedRecruiterId: string | null
+    portalProfileId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5063,6 +6314,7 @@ export namespace Prisma {
     offerDeadline: number
     resumeUrl: number
     assignedRecruiterId: number
+    portalProfileId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -5093,6 +6345,7 @@ export namespace Prisma {
     offerDeadline?: true
     resumeUrl?: true
     assignedRecruiterId?: true
+    portalProfileId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5111,6 +6364,7 @@ export namespace Prisma {
     offerDeadline?: true
     resumeUrl?: true
     assignedRecruiterId?: true
+    portalProfileId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5129,6 +6383,7 @@ export namespace Prisma {
     offerDeadline?: true
     resumeUrl?: true
     assignedRecruiterId?: true
+    portalProfileId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -5234,6 +6489,7 @@ export namespace Prisma {
     offerDeadline: Date | null
     resumeUrl: string | null
     assignedRecruiterId: string
+    portalProfileId: string | null
     createdAt: Date
     updatedAt: Date
     _count: CandidateCountAggregateOutputType | null
@@ -5271,11 +6527,13 @@ export namespace Prisma {
     offerDeadline?: boolean
     resumeUrl?: boolean
     assignedRecruiterId?: boolean
+    portalProfileId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     vacancy?: boolean | VacancyDefaultArgs<ExtArgs>
     stage?: boolean | StageDefaultArgs<ExtArgs>
     assignedRecruiter?: boolean | UserDefaultArgs<ExtArgs>
+    portalProfile?: boolean | Candidate$portalProfileArgs<ExtArgs>
     interviews?: boolean | Candidate$interviewsArgs<ExtArgs>
     comments?: boolean | Candidate$commentsArgs<ExtArgs>
     activity?: boolean | Candidate$activityArgs<ExtArgs>
@@ -5296,11 +6554,13 @@ export namespace Prisma {
     offerDeadline?: boolean
     resumeUrl?: boolean
     assignedRecruiterId?: boolean
+    portalProfileId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     vacancy?: boolean | VacancyDefaultArgs<ExtArgs>
     stage?: boolean | StageDefaultArgs<ExtArgs>
     assignedRecruiter?: boolean | UserDefaultArgs<ExtArgs>
+    portalProfile?: boolean | Candidate$portalProfileArgs<ExtArgs>
   }, ExtArgs["result"]["candidate"]>
 
   export type CandidateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5317,11 +6577,13 @@ export namespace Prisma {
     offerDeadline?: boolean
     resumeUrl?: boolean
     assignedRecruiterId?: boolean
+    portalProfileId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     vacancy?: boolean | VacancyDefaultArgs<ExtArgs>
     stage?: boolean | StageDefaultArgs<ExtArgs>
     assignedRecruiter?: boolean | UserDefaultArgs<ExtArgs>
+    portalProfile?: boolean | Candidate$portalProfileArgs<ExtArgs>
   }, ExtArgs["result"]["candidate"]>
 
   export type CandidateSelectScalar = {
@@ -5338,15 +6600,17 @@ export namespace Prisma {
     offerDeadline?: boolean
     resumeUrl?: boolean
     assignedRecruiterId?: boolean
+    portalProfileId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CandidateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "vacancyId" | "stageId" | "fullName" | "source" | "referrerName" | "grade" | "seniorityExpectations" | "expectedSalary" | "offerAmount" | "offerDeadline" | "resumeUrl" | "assignedRecruiterId" | "createdAt" | "updatedAt", ExtArgs["result"]["candidate"]>
+  export type CandidateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "vacancyId" | "stageId" | "fullName" | "source" | "referrerName" | "grade" | "seniorityExpectations" | "expectedSalary" | "offerAmount" | "offerDeadline" | "resumeUrl" | "assignedRecruiterId" | "portalProfileId" | "createdAt" | "updatedAt", ExtArgs["result"]["candidate"]>
   export type CandidateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     vacancy?: boolean | VacancyDefaultArgs<ExtArgs>
     stage?: boolean | StageDefaultArgs<ExtArgs>
     assignedRecruiter?: boolean | UserDefaultArgs<ExtArgs>
+    portalProfile?: boolean | Candidate$portalProfileArgs<ExtArgs>
     interviews?: boolean | Candidate$interviewsArgs<ExtArgs>
     comments?: boolean | Candidate$commentsArgs<ExtArgs>
     activity?: boolean | Candidate$activityArgs<ExtArgs>
@@ -5356,11 +6620,13 @@ export namespace Prisma {
     vacancy?: boolean | VacancyDefaultArgs<ExtArgs>
     stage?: boolean | StageDefaultArgs<ExtArgs>
     assignedRecruiter?: boolean | UserDefaultArgs<ExtArgs>
+    portalProfile?: boolean | Candidate$portalProfileArgs<ExtArgs>
   }
   export type CandidateIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     vacancy?: boolean | VacancyDefaultArgs<ExtArgs>
     stage?: boolean | StageDefaultArgs<ExtArgs>
     assignedRecruiter?: boolean | UserDefaultArgs<ExtArgs>
+    portalProfile?: boolean | Candidate$portalProfileArgs<ExtArgs>
   }
 
   export type $CandidatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5369,6 +6635,7 @@ export namespace Prisma {
       vacancy: Prisma.$VacancyPayload<ExtArgs>
       stage: Prisma.$StagePayload<ExtArgs>
       assignedRecruiter: Prisma.$UserPayload<ExtArgs>
+      portalProfile: Prisma.$PortalProfilePayload<ExtArgs> | null
       interviews: Prisma.$InterviewPayload<ExtArgs>[]
       comments: Prisma.$CommentPayload<ExtArgs>[]
       activity: Prisma.$ActivityLogPayload<ExtArgs>[]
@@ -5387,6 +6654,7 @@ export namespace Prisma {
       offerDeadline: Date | null
       resumeUrl: string | null
       assignedRecruiterId: string
+      portalProfileId: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["candidate"]>
@@ -5786,6 +7054,7 @@ export namespace Prisma {
     vacancy<T extends VacancyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VacancyDefaultArgs<ExtArgs>>): Prisma__VacancyClient<$Result.GetResult<Prisma.$VacancyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     stage<T extends StageDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StageDefaultArgs<ExtArgs>>): Prisma__StageClient<$Result.GetResult<Prisma.$StagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     assignedRecruiter<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    portalProfile<T extends Candidate$portalProfileArgs<ExtArgs> = {}>(args?: Subset<T, Candidate$portalProfileArgs<ExtArgs>>): Prisma__PortalProfileClient<$Result.GetResult<Prisma.$PortalProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     interviews<T extends Candidate$interviewsArgs<ExtArgs> = {}>(args?: Subset<T, Candidate$interviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InterviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     comments<T extends Candidate$commentsArgs<ExtArgs> = {}>(args?: Subset<T, Candidate$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     activity<T extends Candidate$activityArgs<ExtArgs> = {}>(args?: Subset<T, Candidate$activityArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -5831,6 +7100,7 @@ export namespace Prisma {
     readonly offerDeadline: FieldRef<"Candidate", 'DateTime'>
     readonly resumeUrl: FieldRef<"Candidate", 'String'>
     readonly assignedRecruiterId: FieldRef<"Candidate", 'String'>
+    readonly portalProfileId: FieldRef<"Candidate", 'String'>
     readonly createdAt: FieldRef<"Candidate", 'DateTime'>
     readonly updatedAt: FieldRef<"Candidate", 'DateTime'>
   }
@@ -6231,6 +7501,25 @@ export namespace Prisma {
      * Limit how many Candidates to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Candidate.portalProfile
+   */
+  export type Candidate$portalProfileArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PortalProfile
+     */
+    select?: PortalProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PortalProfile
+     */
+    omit?: PortalProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PortalProfileInclude<ExtArgs> | null
+    where?: PortalProfileWhereInput
   }
 
   /**
@@ -9675,6 +10964,21 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+  export const PortalProfileScalarFieldEnum: {
+    id: 'id',
+    authUserId: 'authUserId',
+    email: 'email',
+    fullName: 'fullName',
+    role: 'role',
+    headline: 'headline',
+    bio: 'bio',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PortalProfileScalarFieldEnum = (typeof PortalProfileScalarFieldEnum)[keyof typeof PortalProfileScalarFieldEnum]
+
+
   export const VacancyScalarFieldEnum: {
     id: 'id',
     title: 'title',
@@ -9711,6 +11015,7 @@ export namespace Prisma {
     offerDeadline: 'offerDeadline',
     resumeUrl: 'resumeUrl',
     assignedRecruiterId: 'assignedRecruiterId',
+    portalProfileId: 'portalProfileId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -9959,6 +11264,81 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
+  export type PortalProfileWhereInput = {
+    AND?: PortalProfileWhereInput | PortalProfileWhereInput[]
+    OR?: PortalProfileWhereInput[]
+    NOT?: PortalProfileWhereInput | PortalProfileWhereInput[]
+    id?: StringFilter<"PortalProfile"> | string
+    authUserId?: StringFilter<"PortalProfile"> | string
+    email?: StringFilter<"PortalProfile"> | string
+    fullName?: StringFilter<"PortalProfile"> | string
+    role?: StringFilter<"PortalProfile"> | string
+    headline?: StringNullableFilter<"PortalProfile"> | string | null
+    bio?: StringNullableFilter<"PortalProfile"> | string | null
+    createdAt?: DateTimeFilter<"PortalProfile"> | Date | string
+    updatedAt?: DateTimeFilter<"PortalProfile"> | Date | string
+    applications?: CandidateListRelationFilter
+  }
+
+  export type PortalProfileOrderByWithRelationInput = {
+    id?: SortOrder
+    authUserId?: SortOrder
+    email?: SortOrder
+    fullName?: SortOrder
+    role?: SortOrder
+    headline?: SortOrderInput | SortOrder
+    bio?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    applications?: CandidateOrderByRelationAggregateInput
+  }
+
+  export type PortalProfileWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    authUserId?: string
+    AND?: PortalProfileWhereInput | PortalProfileWhereInput[]
+    OR?: PortalProfileWhereInput[]
+    NOT?: PortalProfileWhereInput | PortalProfileWhereInput[]
+    email?: StringFilter<"PortalProfile"> | string
+    fullName?: StringFilter<"PortalProfile"> | string
+    role?: StringFilter<"PortalProfile"> | string
+    headline?: StringNullableFilter<"PortalProfile"> | string | null
+    bio?: StringNullableFilter<"PortalProfile"> | string | null
+    createdAt?: DateTimeFilter<"PortalProfile"> | Date | string
+    updatedAt?: DateTimeFilter<"PortalProfile"> | Date | string
+    applications?: CandidateListRelationFilter
+  }, "id" | "authUserId">
+
+  export type PortalProfileOrderByWithAggregationInput = {
+    id?: SortOrder
+    authUserId?: SortOrder
+    email?: SortOrder
+    fullName?: SortOrder
+    role?: SortOrder
+    headline?: SortOrderInput | SortOrder
+    bio?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PortalProfileCountOrderByAggregateInput
+    _max?: PortalProfileMaxOrderByAggregateInput
+    _min?: PortalProfileMinOrderByAggregateInput
+  }
+
+  export type PortalProfileScalarWhereWithAggregatesInput = {
+    AND?: PortalProfileScalarWhereWithAggregatesInput | PortalProfileScalarWhereWithAggregatesInput[]
+    OR?: PortalProfileScalarWhereWithAggregatesInput[]
+    NOT?: PortalProfileScalarWhereWithAggregatesInput | PortalProfileScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PortalProfile"> | string
+    authUserId?: StringWithAggregatesFilter<"PortalProfile"> | string
+    email?: StringWithAggregatesFilter<"PortalProfile"> | string
+    fullName?: StringWithAggregatesFilter<"PortalProfile"> | string
+    role?: StringWithAggregatesFilter<"PortalProfile"> | string
+    headline?: StringNullableWithAggregatesFilter<"PortalProfile"> | string | null
+    bio?: StringNullableWithAggregatesFilter<"PortalProfile"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"PortalProfile"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PortalProfile"> | Date | string
+  }
+
   export type VacancyWhereInput = {
     AND?: VacancyWhereInput | VacancyWhereInput[]
     OR?: VacancyWhereInput[]
@@ -10094,11 +11474,13 @@ export namespace Prisma {
     offerDeadline?: DateTimeNullableFilter<"Candidate"> | Date | string | null
     resumeUrl?: StringNullableFilter<"Candidate"> | string | null
     assignedRecruiterId?: StringFilter<"Candidate"> | string
+    portalProfileId?: StringNullableFilter<"Candidate"> | string | null
     createdAt?: DateTimeFilter<"Candidate"> | Date | string
     updatedAt?: DateTimeFilter<"Candidate"> | Date | string
     vacancy?: XOR<VacancyScalarRelationFilter, VacancyWhereInput>
     stage?: XOR<StageScalarRelationFilter, StageWhereInput>
     assignedRecruiter?: XOR<UserScalarRelationFilter, UserWhereInput>
+    portalProfile?: XOR<PortalProfileNullableScalarRelationFilter, PortalProfileWhereInput> | null
     interviews?: InterviewListRelationFilter
     comments?: CommentListRelationFilter
     activity?: ActivityLogListRelationFilter
@@ -10118,11 +11500,13 @@ export namespace Prisma {
     offerDeadline?: SortOrderInput | SortOrder
     resumeUrl?: SortOrderInput | SortOrder
     assignedRecruiterId?: SortOrder
+    portalProfileId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     vacancy?: VacancyOrderByWithRelationInput
     stage?: StageOrderByWithRelationInput
     assignedRecruiter?: UserOrderByWithRelationInput
+    portalProfile?: PortalProfileOrderByWithRelationInput
     interviews?: InterviewOrderByRelationAggregateInput
     comments?: CommentOrderByRelationAggregateInput
     activity?: ActivityLogOrderByRelationAggregateInput
@@ -10130,6 +11514,7 @@ export namespace Prisma {
 
   export type CandidateWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    vacancyId_portalProfileId?: CandidateVacancyIdPortalProfileIdCompoundUniqueInput
     AND?: CandidateWhereInput | CandidateWhereInput[]
     OR?: CandidateWhereInput[]
     NOT?: CandidateWhereInput | CandidateWhereInput[]
@@ -10145,15 +11530,17 @@ export namespace Prisma {
     offerDeadline?: DateTimeNullableFilter<"Candidate"> | Date | string | null
     resumeUrl?: StringNullableFilter<"Candidate"> | string | null
     assignedRecruiterId?: StringFilter<"Candidate"> | string
+    portalProfileId?: StringNullableFilter<"Candidate"> | string | null
     createdAt?: DateTimeFilter<"Candidate"> | Date | string
     updatedAt?: DateTimeFilter<"Candidate"> | Date | string
     vacancy?: XOR<VacancyScalarRelationFilter, VacancyWhereInput>
     stage?: XOR<StageScalarRelationFilter, StageWhereInput>
     assignedRecruiter?: XOR<UserScalarRelationFilter, UserWhereInput>
+    portalProfile?: XOR<PortalProfileNullableScalarRelationFilter, PortalProfileWhereInput> | null
     interviews?: InterviewListRelationFilter
     comments?: CommentListRelationFilter
     activity?: ActivityLogListRelationFilter
-  }, "id">
+  }, "id" | "vacancyId_portalProfileId">
 
   export type CandidateOrderByWithAggregationInput = {
     id?: SortOrder
@@ -10169,6 +11556,7 @@ export namespace Prisma {
     offerDeadline?: SortOrderInput | SortOrder
     resumeUrl?: SortOrderInput | SortOrder
     assignedRecruiterId?: SortOrder
+    portalProfileId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CandidateCountOrderByAggregateInput
@@ -10195,6 +11583,7 @@ export namespace Prisma {
     offerDeadline?: DateTimeNullableWithAggregatesFilter<"Candidate"> | Date | string | null
     resumeUrl?: StringNullableWithAggregatesFilter<"Candidate"> | string | null
     assignedRecruiterId?: StringWithAggregatesFilter<"Candidate"> | string
+    portalProfileId?: StringNullableWithAggregatesFilter<"Candidate"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Candidate"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Candidate"> | Date | string
   }
@@ -10484,6 +11873,94 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PortalProfileCreateInput = {
+    id?: string
+    authUserId: string
+    email: string
+    fullName: string
+    role?: string
+    headline?: string | null
+    bio?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    applications?: CandidateCreateNestedManyWithoutPortalProfileInput
+  }
+
+  export type PortalProfileUncheckedCreateInput = {
+    id?: string
+    authUserId: string
+    email: string
+    fullName: string
+    role?: string
+    headline?: string | null
+    bio?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    applications?: CandidateUncheckedCreateNestedManyWithoutPortalProfileInput
+  }
+
+  export type PortalProfileUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    authUserId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    headline?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    applications?: CandidateUpdateManyWithoutPortalProfileNestedInput
+  }
+
+  export type PortalProfileUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    authUserId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    headline?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    applications?: CandidateUncheckedUpdateManyWithoutPortalProfileNestedInput
+  }
+
+  export type PortalProfileCreateManyInput = {
+    id?: string
+    authUserId: string
+    email: string
+    fullName: string
+    role?: string
+    headline?: string | null
+    bio?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PortalProfileUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    authUserId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    headline?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PortalProfileUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    authUserId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    headline?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type VacancyCreateInput = {
     id?: string
     title: string
@@ -10623,6 +12100,7 @@ export namespace Prisma {
     vacancy: VacancyCreateNestedOneWithoutCandidatesInput
     stage: StageCreateNestedOneWithoutCandidatesInput
     assignedRecruiter: UserCreateNestedOneWithoutCandidatesInput
+    portalProfile?: PortalProfileCreateNestedOneWithoutApplicationsInput
     interviews?: InterviewCreateNestedManyWithoutCandidateInput
     comments?: CommentCreateNestedManyWithoutCandidateInput
     activity?: ActivityLogCreateNestedManyWithoutCandidateInput
@@ -10642,6 +12120,7 @@ export namespace Prisma {
     offerDeadline?: Date | string | null
     resumeUrl?: string | null
     assignedRecruiterId: string
+    portalProfileId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     interviews?: InterviewUncheckedCreateNestedManyWithoutCandidateInput
@@ -10665,6 +12144,7 @@ export namespace Prisma {
     vacancy?: VacancyUpdateOneRequiredWithoutCandidatesNestedInput
     stage?: StageUpdateOneRequiredWithoutCandidatesNestedInput
     assignedRecruiter?: UserUpdateOneRequiredWithoutCandidatesNestedInput
+    portalProfile?: PortalProfileUpdateOneWithoutApplicationsNestedInput
     interviews?: InterviewUpdateManyWithoutCandidateNestedInput
     comments?: CommentUpdateManyWithoutCandidateNestedInput
     activity?: ActivityLogUpdateManyWithoutCandidateNestedInput
@@ -10684,6 +12164,7 @@ export namespace Prisma {
     offerDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resumeUrl?: NullableStringFieldUpdateOperationsInput | string | null
     assignedRecruiterId?: StringFieldUpdateOperationsInput | string
+    portalProfileId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     interviews?: InterviewUncheckedUpdateManyWithoutCandidateNestedInput
@@ -10705,6 +12186,7 @@ export namespace Prisma {
     offerDeadline?: Date | string | null
     resumeUrl?: string | null
     assignedRecruiterId: string
+    portalProfileId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -10738,6 +12220,7 @@ export namespace Prisma {
     offerDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resumeUrl?: NullableStringFieldUpdateOperationsInput | string | null
     assignedRecruiterId?: StringFieldUpdateOperationsInput | string
+    portalProfileId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11084,6 +12567,80 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type PortalProfileCountOrderByAggregateInput = {
+    id?: SortOrder
+    authUserId?: SortOrder
+    email?: SortOrder
+    fullName?: SortOrder
+    role?: SortOrder
+    headline?: SortOrder
+    bio?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PortalProfileMaxOrderByAggregateInput = {
+    id?: SortOrder
+    authUserId?: SortOrder
+    email?: SortOrder
+    fullName?: SortOrder
+    role?: SortOrder
+    headline?: SortOrder
+    bio?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PortalProfileMinOrderByAggregateInput = {
+    id?: SortOrder
+    authUserId?: SortOrder
+    email?: SortOrder
+    fullName?: SortOrder
+    role?: SortOrder
+    headline?: SortOrder
+    bio?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type StageListRelationFilter = {
     every?: StageWhereInput
     some?: StageWhereInput
@@ -11182,21 +12739,6 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type FloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -11240,9 +12782,14 @@ export namespace Prisma {
     isNot?: UserWhereInput
   }
 
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
+  export type PortalProfileNullableScalarRelationFilter = {
+    is?: PortalProfileWhereInput | null
+    isNot?: PortalProfileWhereInput | null
+  }
+
+  export type CandidateVacancyIdPortalProfileIdCompoundUniqueInput = {
+    vacancyId: string
+    portalProfileId: string
   }
 
   export type CandidateCountOrderByAggregateInput = {
@@ -11259,6 +12806,7 @@ export namespace Prisma {
     offerDeadline?: SortOrder
     resumeUrl?: SortOrder
     assignedRecruiterId?: SortOrder
+    portalProfileId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -11282,6 +12830,7 @@ export namespace Prisma {
     offerDeadline?: SortOrder
     resumeUrl?: SortOrder
     assignedRecruiterId?: SortOrder
+    portalProfileId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -11300,6 +12849,7 @@ export namespace Prisma {
     offerDeadline?: SortOrder
     resumeUrl?: SortOrder
     assignedRecruiterId?: SortOrder
+    portalProfileId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -11307,24 +12857,6 @@ export namespace Prisma {
   export type CandidateSumOrderByAggregateInput = {
     expectedSalary?: SortOrder
     offerAmount?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -11754,6 +13286,52 @@ export namespace Prisma {
     deleteMany?: ActivityLogScalarWhereInput | ActivityLogScalarWhereInput[]
   }
 
+  export type CandidateCreateNestedManyWithoutPortalProfileInput = {
+    create?: XOR<CandidateCreateWithoutPortalProfileInput, CandidateUncheckedCreateWithoutPortalProfileInput> | CandidateCreateWithoutPortalProfileInput[] | CandidateUncheckedCreateWithoutPortalProfileInput[]
+    connectOrCreate?: CandidateCreateOrConnectWithoutPortalProfileInput | CandidateCreateOrConnectWithoutPortalProfileInput[]
+    createMany?: CandidateCreateManyPortalProfileInputEnvelope
+    connect?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+  }
+
+  export type CandidateUncheckedCreateNestedManyWithoutPortalProfileInput = {
+    create?: XOR<CandidateCreateWithoutPortalProfileInput, CandidateUncheckedCreateWithoutPortalProfileInput> | CandidateCreateWithoutPortalProfileInput[] | CandidateUncheckedCreateWithoutPortalProfileInput[]
+    connectOrCreate?: CandidateCreateOrConnectWithoutPortalProfileInput | CandidateCreateOrConnectWithoutPortalProfileInput[]
+    createMany?: CandidateCreateManyPortalProfileInputEnvelope
+    connect?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type CandidateUpdateManyWithoutPortalProfileNestedInput = {
+    create?: XOR<CandidateCreateWithoutPortalProfileInput, CandidateUncheckedCreateWithoutPortalProfileInput> | CandidateCreateWithoutPortalProfileInput[] | CandidateUncheckedCreateWithoutPortalProfileInput[]
+    connectOrCreate?: CandidateCreateOrConnectWithoutPortalProfileInput | CandidateCreateOrConnectWithoutPortalProfileInput[]
+    upsert?: CandidateUpsertWithWhereUniqueWithoutPortalProfileInput | CandidateUpsertWithWhereUniqueWithoutPortalProfileInput[]
+    createMany?: CandidateCreateManyPortalProfileInputEnvelope
+    set?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    disconnect?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    delete?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    connect?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    update?: CandidateUpdateWithWhereUniqueWithoutPortalProfileInput | CandidateUpdateWithWhereUniqueWithoutPortalProfileInput[]
+    updateMany?: CandidateUpdateManyWithWhereWithoutPortalProfileInput | CandidateUpdateManyWithWhereWithoutPortalProfileInput[]
+    deleteMany?: CandidateScalarWhereInput | CandidateScalarWhereInput[]
+  }
+
+  export type CandidateUncheckedUpdateManyWithoutPortalProfileNestedInput = {
+    create?: XOR<CandidateCreateWithoutPortalProfileInput, CandidateUncheckedCreateWithoutPortalProfileInput> | CandidateCreateWithoutPortalProfileInput[] | CandidateUncheckedCreateWithoutPortalProfileInput[]
+    connectOrCreate?: CandidateCreateOrConnectWithoutPortalProfileInput | CandidateCreateOrConnectWithoutPortalProfileInput[]
+    upsert?: CandidateUpsertWithWhereUniqueWithoutPortalProfileInput | CandidateUpsertWithWhereUniqueWithoutPortalProfileInput[]
+    createMany?: CandidateCreateManyPortalProfileInputEnvelope
+    set?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    disconnect?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    delete?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    connect?: CandidateWhereUniqueInput | CandidateWhereUniqueInput[]
+    update?: CandidateUpdateWithWhereUniqueWithoutPortalProfileInput | CandidateUpdateWithWhereUniqueWithoutPortalProfileInput[]
+    updateMany?: CandidateUpdateManyWithWhereWithoutPortalProfileInput | CandidateUpdateManyWithWhereWithoutPortalProfileInput[]
+    deleteMany?: CandidateScalarWhereInput | CandidateScalarWhereInput[]
+  }
+
   export type StageCreateNestedManyWithoutVacancyInput = {
     create?: XOR<StageCreateWithoutVacancyInput, StageUncheckedCreateWithoutVacancyInput> | StageCreateWithoutVacancyInput[] | StageUncheckedCreateWithoutVacancyInput[]
     connectOrCreate?: StageCreateOrConnectWithoutVacancyInput | StageCreateOrConnectWithoutVacancyInput[]
@@ -11920,6 +13498,12 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type PortalProfileCreateNestedOneWithoutApplicationsInput = {
+    create?: XOR<PortalProfileCreateWithoutApplicationsInput, PortalProfileUncheckedCreateWithoutApplicationsInput>
+    connectOrCreate?: PortalProfileCreateOrConnectWithoutApplicationsInput
+    connect?: PortalProfileWhereUniqueInput
+  }
+
   export type InterviewCreateNestedManyWithoutCandidateInput = {
     create?: XOR<InterviewCreateWithoutCandidateInput, InterviewUncheckedCreateWithoutCandidateInput> | InterviewCreateWithoutCandidateInput[] | InterviewUncheckedCreateWithoutCandidateInput[]
     connectOrCreate?: InterviewCreateOrConnectWithoutCandidateInput | InterviewCreateOrConnectWithoutCandidateInput[]
@@ -11960,10 +13544,6 @@ export namespace Prisma {
     connectOrCreate?: ActivityLogCreateOrConnectWithoutCandidateInput | ActivityLogCreateOrConnectWithoutCandidateInput[]
     createMany?: ActivityLogCreateManyCandidateInputEnvelope
     connect?: ActivityLogWhereUniqueInput | ActivityLogWhereUniqueInput[]
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -12008,6 +13588,16 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutCandidatesInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCandidatesInput, UserUpdateWithoutCandidatesInput>, UserUncheckedUpdateWithoutCandidatesInput>
+  }
+
+  export type PortalProfileUpdateOneWithoutApplicationsNestedInput = {
+    create?: XOR<PortalProfileCreateWithoutApplicationsInput, PortalProfileUncheckedCreateWithoutApplicationsInput>
+    connectOrCreate?: PortalProfileCreateOrConnectWithoutApplicationsInput
+    upsert?: PortalProfileUpsertWithoutApplicationsInput
+    disconnect?: PortalProfileWhereInput | boolean
+    delete?: PortalProfileWhereInput | boolean
+    connect?: PortalProfileWhereUniqueInput
+    update?: XOR<XOR<PortalProfileUpdateToOneWithWhereWithoutApplicationsInput, PortalProfileUpdateWithoutApplicationsInput>, PortalProfileUncheckedUpdateWithoutApplicationsInput>
   }
 
   export type InterviewUpdateManyWithoutCandidateNestedInput = {
@@ -12258,33 +13848,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -12297,28 +13860,6 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -12347,6 +13888,55 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -12456,6 +14046,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     vacancy: VacancyCreateNestedOneWithoutCandidatesInput
     stage: StageCreateNestedOneWithoutCandidatesInput
+    portalProfile?: PortalProfileCreateNestedOneWithoutApplicationsInput
     interviews?: InterviewCreateNestedManyWithoutCandidateInput
     comments?: CommentCreateNestedManyWithoutCandidateInput
     activity?: ActivityLogCreateNestedManyWithoutCandidateInput
@@ -12474,6 +14065,7 @@ export namespace Prisma {
     offerAmount?: number | null
     offerDeadline?: Date | string | null
     resumeUrl?: string | null
+    portalProfileId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     interviews?: InterviewUncheckedCreateNestedManyWithoutCandidateInput
@@ -12608,6 +14200,7 @@ export namespace Prisma {
     offerDeadline?: DateTimeNullableFilter<"Candidate"> | Date | string | null
     resumeUrl?: StringNullableFilter<"Candidate"> | string | null
     assignedRecruiterId?: StringFilter<"Candidate"> | string
+    portalProfileId?: StringNullableFilter<"Candidate"> | string | null
     createdAt?: DateTimeFilter<"Candidate"> | Date | string
     updatedAt?: DateTimeFilter<"Candidate"> | Date | string
   }
@@ -12699,6 +14292,74 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"ActivityLog"> | Date | string
   }
 
+  export type CandidateCreateWithoutPortalProfileInput = {
+    id?: string
+    fullName: string
+    source: string
+    referrerName?: string | null
+    grade: string
+    seniorityExpectations?: string | null
+    expectedSalary: number
+    offerAmount?: number | null
+    offerDeadline?: Date | string | null
+    resumeUrl?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    vacancy: VacancyCreateNestedOneWithoutCandidatesInput
+    stage: StageCreateNestedOneWithoutCandidatesInput
+    assignedRecruiter: UserCreateNestedOneWithoutCandidatesInput
+    interviews?: InterviewCreateNestedManyWithoutCandidateInput
+    comments?: CommentCreateNestedManyWithoutCandidateInput
+    activity?: ActivityLogCreateNestedManyWithoutCandidateInput
+  }
+
+  export type CandidateUncheckedCreateWithoutPortalProfileInput = {
+    id?: string
+    vacancyId: string
+    stageId: string
+    fullName: string
+    source: string
+    referrerName?: string | null
+    grade: string
+    seniorityExpectations?: string | null
+    expectedSalary: number
+    offerAmount?: number | null
+    offerDeadline?: Date | string | null
+    resumeUrl?: string | null
+    assignedRecruiterId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    interviews?: InterviewUncheckedCreateNestedManyWithoutCandidateInput
+    comments?: CommentUncheckedCreateNestedManyWithoutCandidateInput
+    activity?: ActivityLogUncheckedCreateNestedManyWithoutCandidateInput
+  }
+
+  export type CandidateCreateOrConnectWithoutPortalProfileInput = {
+    where: CandidateWhereUniqueInput
+    create: XOR<CandidateCreateWithoutPortalProfileInput, CandidateUncheckedCreateWithoutPortalProfileInput>
+  }
+
+  export type CandidateCreateManyPortalProfileInputEnvelope = {
+    data: CandidateCreateManyPortalProfileInput | CandidateCreateManyPortalProfileInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CandidateUpsertWithWhereUniqueWithoutPortalProfileInput = {
+    where: CandidateWhereUniqueInput
+    update: XOR<CandidateUpdateWithoutPortalProfileInput, CandidateUncheckedUpdateWithoutPortalProfileInput>
+    create: XOR<CandidateCreateWithoutPortalProfileInput, CandidateUncheckedCreateWithoutPortalProfileInput>
+  }
+
+  export type CandidateUpdateWithWhereUniqueWithoutPortalProfileInput = {
+    where: CandidateWhereUniqueInput
+    data: XOR<CandidateUpdateWithoutPortalProfileInput, CandidateUncheckedUpdateWithoutPortalProfileInput>
+  }
+
+  export type CandidateUpdateManyWithWhereWithoutPortalProfileInput = {
+    where: CandidateScalarWhereInput
+    data: XOR<CandidateUpdateManyMutationInput, CandidateUncheckedUpdateManyWithoutPortalProfileInput>
+  }
+
   export type StageCreateWithoutVacancyInput = {
     id?: string
     name: string
@@ -12738,6 +14399,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     stage: StageCreateNestedOneWithoutCandidatesInput
     assignedRecruiter: UserCreateNestedOneWithoutCandidatesInput
+    portalProfile?: PortalProfileCreateNestedOneWithoutApplicationsInput
     interviews?: InterviewCreateNestedManyWithoutCandidateInput
     comments?: CommentCreateNestedManyWithoutCandidateInput
     activity?: ActivityLogCreateNestedManyWithoutCandidateInput
@@ -12756,6 +14418,7 @@ export namespace Prisma {
     offerDeadline?: Date | string | null
     resumeUrl?: string | null
     assignedRecruiterId: string
+    portalProfileId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     interviews?: InterviewUncheckedCreateNestedManyWithoutCandidateInput
@@ -12855,6 +14518,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     vacancy: VacancyCreateNestedOneWithoutCandidatesInput
     assignedRecruiter: UserCreateNestedOneWithoutCandidatesInput
+    portalProfile?: PortalProfileCreateNestedOneWithoutApplicationsInput
     interviews?: InterviewCreateNestedManyWithoutCandidateInput
     comments?: CommentCreateNestedManyWithoutCandidateInput
     activity?: ActivityLogCreateNestedManyWithoutCandidateInput
@@ -12873,6 +14537,7 @@ export namespace Prisma {
     offerDeadline?: Date | string | null
     resumeUrl?: string | null
     assignedRecruiterId: string
+    portalProfileId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     interviews?: InterviewUncheckedCreateNestedManyWithoutCandidateInput
@@ -13008,6 +14673,35 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutCandidatesInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutCandidatesInput, UserUncheckedCreateWithoutCandidatesInput>
+  }
+
+  export type PortalProfileCreateWithoutApplicationsInput = {
+    id?: string
+    authUserId: string
+    email: string
+    fullName: string
+    role?: string
+    headline?: string | null
+    bio?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PortalProfileUncheckedCreateWithoutApplicationsInput = {
+    id?: string
+    authUserId: string
+    email: string
+    fullName: string
+    role?: string
+    headline?: string | null
+    bio?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PortalProfileCreateOrConnectWithoutApplicationsInput = {
+    where: PortalProfileWhereUniqueInput
+    create: XOR<PortalProfileCreateWithoutApplicationsInput, PortalProfileUncheckedCreateWithoutApplicationsInput>
   }
 
   export type InterviewCreateWithoutCandidateInput = {
@@ -13185,6 +14879,41 @@ export namespace Prisma {
     activityLog?: ActivityLogUncheckedUpdateManyWithoutActorNestedInput
   }
 
+  export type PortalProfileUpsertWithoutApplicationsInput = {
+    update: XOR<PortalProfileUpdateWithoutApplicationsInput, PortalProfileUncheckedUpdateWithoutApplicationsInput>
+    create: XOR<PortalProfileCreateWithoutApplicationsInput, PortalProfileUncheckedCreateWithoutApplicationsInput>
+    where?: PortalProfileWhereInput
+  }
+
+  export type PortalProfileUpdateToOneWithWhereWithoutApplicationsInput = {
+    where?: PortalProfileWhereInput
+    data: XOR<PortalProfileUpdateWithoutApplicationsInput, PortalProfileUncheckedUpdateWithoutApplicationsInput>
+  }
+
+  export type PortalProfileUpdateWithoutApplicationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    authUserId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    headline?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PortalProfileUncheckedUpdateWithoutApplicationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    authUserId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    headline?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type InterviewUpsertWithWhereUniqueWithoutCandidateInput = {
     where: InterviewWhereUniqueInput
     update: XOR<InterviewUpdateWithoutCandidateInput, InterviewUncheckedUpdateWithoutCandidateInput>
@@ -13249,6 +14978,7 @@ export namespace Prisma {
     vacancy: VacancyCreateNestedOneWithoutCandidatesInput
     stage: StageCreateNestedOneWithoutCandidatesInput
     assignedRecruiter: UserCreateNestedOneWithoutCandidatesInput
+    portalProfile?: PortalProfileCreateNestedOneWithoutApplicationsInput
     comments?: CommentCreateNestedManyWithoutCandidateInput
     activity?: ActivityLogCreateNestedManyWithoutCandidateInput
   }
@@ -13267,6 +14997,7 @@ export namespace Prisma {
     offerDeadline?: Date | string | null
     resumeUrl?: string | null
     assignedRecruiterId: string
+    portalProfileId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutCandidateInput
@@ -13334,6 +15065,7 @@ export namespace Prisma {
     vacancy?: VacancyUpdateOneRequiredWithoutCandidatesNestedInput
     stage?: StageUpdateOneRequiredWithoutCandidatesNestedInput
     assignedRecruiter?: UserUpdateOneRequiredWithoutCandidatesNestedInput
+    portalProfile?: PortalProfileUpdateOneWithoutApplicationsNestedInput
     comments?: CommentUpdateManyWithoutCandidateNestedInput
     activity?: ActivityLogUpdateManyWithoutCandidateNestedInput
   }
@@ -13352,6 +15084,7 @@ export namespace Prisma {
     offerDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resumeUrl?: NullableStringFieldUpdateOperationsInput | string | null
     assignedRecruiterId?: StringFieldUpdateOperationsInput | string
+    portalProfileId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutCandidateNestedInput
@@ -13409,6 +15142,7 @@ export namespace Prisma {
     vacancy: VacancyCreateNestedOneWithoutCandidatesInput
     stage: StageCreateNestedOneWithoutCandidatesInput
     assignedRecruiter: UserCreateNestedOneWithoutCandidatesInput
+    portalProfile?: PortalProfileCreateNestedOneWithoutApplicationsInput
     interviews?: InterviewCreateNestedManyWithoutCandidateInput
     activity?: ActivityLogCreateNestedManyWithoutCandidateInput
   }
@@ -13427,6 +15161,7 @@ export namespace Prisma {
     offerDeadline?: Date | string | null
     resumeUrl?: string | null
     assignedRecruiterId: string
+    portalProfileId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     interviews?: InterviewUncheckedCreateNestedManyWithoutCandidateInput
@@ -13494,6 +15229,7 @@ export namespace Prisma {
     vacancy?: VacancyUpdateOneRequiredWithoutCandidatesNestedInput
     stage?: StageUpdateOneRequiredWithoutCandidatesNestedInput
     assignedRecruiter?: UserUpdateOneRequiredWithoutCandidatesNestedInput
+    portalProfile?: PortalProfileUpdateOneWithoutApplicationsNestedInput
     interviews?: InterviewUpdateManyWithoutCandidateNestedInput
     activity?: ActivityLogUpdateManyWithoutCandidateNestedInput
   }
@@ -13512,6 +15248,7 @@ export namespace Prisma {
     offerDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resumeUrl?: NullableStringFieldUpdateOperationsInput | string | null
     assignedRecruiterId?: StringFieldUpdateOperationsInput | string
+    portalProfileId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     interviews?: InterviewUncheckedUpdateManyWithoutCandidateNestedInput
@@ -13569,6 +15306,7 @@ export namespace Prisma {
     vacancy: VacancyCreateNestedOneWithoutCandidatesInput
     stage: StageCreateNestedOneWithoutCandidatesInput
     assignedRecruiter: UserCreateNestedOneWithoutCandidatesInput
+    portalProfile?: PortalProfileCreateNestedOneWithoutApplicationsInput
     interviews?: InterviewCreateNestedManyWithoutCandidateInput
     comments?: CommentCreateNestedManyWithoutCandidateInput
   }
@@ -13587,6 +15325,7 @@ export namespace Prisma {
     offerDeadline?: Date | string | null
     resumeUrl?: string | null
     assignedRecruiterId: string
+    portalProfileId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     interviews?: InterviewUncheckedCreateNestedManyWithoutCandidateInput
@@ -13654,6 +15393,7 @@ export namespace Prisma {
     vacancy?: VacancyUpdateOneRequiredWithoutCandidatesNestedInput
     stage?: StageUpdateOneRequiredWithoutCandidatesNestedInput
     assignedRecruiter?: UserUpdateOneRequiredWithoutCandidatesNestedInput
+    portalProfile?: PortalProfileUpdateOneWithoutApplicationsNestedInput
     interviews?: InterviewUpdateManyWithoutCandidateNestedInput
     comments?: CommentUpdateManyWithoutCandidateNestedInput
   }
@@ -13672,6 +15412,7 @@ export namespace Prisma {
     offerDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resumeUrl?: NullableStringFieldUpdateOperationsInput | string | null
     assignedRecruiterId?: StringFieldUpdateOperationsInput | string
+    portalProfileId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     interviews?: InterviewUncheckedUpdateManyWithoutCandidateNestedInput
@@ -13726,6 +15467,7 @@ export namespace Prisma {
     offerAmount?: number | null
     offerDeadline?: Date | string | null
     resumeUrl?: string | null
+    portalProfileId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13772,6 +15514,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     vacancy?: VacancyUpdateOneRequiredWithoutCandidatesNestedInput
     stage?: StageUpdateOneRequiredWithoutCandidatesNestedInput
+    portalProfile?: PortalProfileUpdateOneWithoutApplicationsNestedInput
     interviews?: InterviewUpdateManyWithoutCandidateNestedInput
     comments?: CommentUpdateManyWithoutCandidateNestedInput
     activity?: ActivityLogUpdateManyWithoutCandidateNestedInput
@@ -13790,6 +15533,7 @@ export namespace Prisma {
     offerAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     offerDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resumeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    portalProfileId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     interviews?: InterviewUncheckedUpdateManyWithoutCandidateNestedInput
@@ -13810,6 +15554,7 @@ export namespace Prisma {
     offerAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     offerDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resumeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    portalProfileId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13895,6 +15640,84 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type CandidateCreateManyPortalProfileInput = {
+    id?: string
+    vacancyId: string
+    stageId: string
+    fullName: string
+    source: string
+    referrerName?: string | null
+    grade: string
+    seniorityExpectations?: string | null
+    expectedSalary: number
+    offerAmount?: number | null
+    offerDeadline?: Date | string | null
+    resumeUrl?: string | null
+    assignedRecruiterId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CandidateUpdateWithoutPortalProfileInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    referrerName?: NullableStringFieldUpdateOperationsInput | string | null
+    grade?: StringFieldUpdateOperationsInput | string
+    seniorityExpectations?: NullableStringFieldUpdateOperationsInput | string | null
+    expectedSalary?: FloatFieldUpdateOperationsInput | number
+    offerAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    offerDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resumeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vacancy?: VacancyUpdateOneRequiredWithoutCandidatesNestedInput
+    stage?: StageUpdateOneRequiredWithoutCandidatesNestedInput
+    assignedRecruiter?: UserUpdateOneRequiredWithoutCandidatesNestedInput
+    interviews?: InterviewUpdateManyWithoutCandidateNestedInput
+    comments?: CommentUpdateManyWithoutCandidateNestedInput
+    activity?: ActivityLogUpdateManyWithoutCandidateNestedInput
+  }
+
+  export type CandidateUncheckedUpdateWithoutPortalProfileInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    vacancyId?: StringFieldUpdateOperationsInput | string
+    stageId?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    referrerName?: NullableStringFieldUpdateOperationsInput | string | null
+    grade?: StringFieldUpdateOperationsInput | string
+    seniorityExpectations?: NullableStringFieldUpdateOperationsInput | string | null
+    expectedSalary?: FloatFieldUpdateOperationsInput | number
+    offerAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    offerDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resumeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedRecruiterId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    interviews?: InterviewUncheckedUpdateManyWithoutCandidateNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutCandidateNestedInput
+    activity?: ActivityLogUncheckedUpdateManyWithoutCandidateNestedInput
+  }
+
+  export type CandidateUncheckedUpdateManyWithoutPortalProfileInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    vacancyId?: StringFieldUpdateOperationsInput | string
+    stageId?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    referrerName?: NullableStringFieldUpdateOperationsInput | string | null
+    grade?: StringFieldUpdateOperationsInput | string
+    seniorityExpectations?: NullableStringFieldUpdateOperationsInput | string | null
+    expectedSalary?: FloatFieldUpdateOperationsInput | number
+    offerAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    offerDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resumeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedRecruiterId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StageCreateManyVacancyInput = {
     id?: string
     name: string
@@ -13914,6 +15737,7 @@ export namespace Prisma {
     offerDeadline?: Date | string | null
     resumeUrl?: string | null
     assignedRecruiterId: string
+    portalProfileId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13953,6 +15777,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stage?: StageUpdateOneRequiredWithoutCandidatesNestedInput
     assignedRecruiter?: UserUpdateOneRequiredWithoutCandidatesNestedInput
+    portalProfile?: PortalProfileUpdateOneWithoutApplicationsNestedInput
     interviews?: InterviewUpdateManyWithoutCandidateNestedInput
     comments?: CommentUpdateManyWithoutCandidateNestedInput
     activity?: ActivityLogUpdateManyWithoutCandidateNestedInput
@@ -13971,6 +15796,7 @@ export namespace Prisma {
     offerDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resumeUrl?: NullableStringFieldUpdateOperationsInput | string | null
     assignedRecruiterId?: StringFieldUpdateOperationsInput | string
+    portalProfileId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     interviews?: InterviewUncheckedUpdateManyWithoutCandidateNestedInput
@@ -13991,6 +15817,7 @@ export namespace Prisma {
     offerDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resumeUrl?: NullableStringFieldUpdateOperationsInput | string | null
     assignedRecruiterId?: StringFieldUpdateOperationsInput | string
+    portalProfileId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14008,6 +15835,7 @@ export namespace Prisma {
     offerDeadline?: Date | string | null
     resumeUrl?: string | null
     assignedRecruiterId: string
+    portalProfileId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -14027,6 +15855,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     vacancy?: VacancyUpdateOneRequiredWithoutCandidatesNestedInput
     assignedRecruiter?: UserUpdateOneRequiredWithoutCandidatesNestedInput
+    portalProfile?: PortalProfileUpdateOneWithoutApplicationsNestedInput
     interviews?: InterviewUpdateManyWithoutCandidateNestedInput
     comments?: CommentUpdateManyWithoutCandidateNestedInput
     activity?: ActivityLogUpdateManyWithoutCandidateNestedInput
@@ -14045,6 +15874,7 @@ export namespace Prisma {
     offerDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resumeUrl?: NullableStringFieldUpdateOperationsInput | string | null
     assignedRecruiterId?: StringFieldUpdateOperationsInput | string
+    portalProfileId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     interviews?: InterviewUncheckedUpdateManyWithoutCandidateNestedInput
@@ -14065,6 +15895,7 @@ export namespace Prisma {
     offerDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resumeUrl?: NullableStringFieldUpdateOperationsInput | string | null
     assignedRecruiterId?: StringFieldUpdateOperationsInput | string
+    portalProfileId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

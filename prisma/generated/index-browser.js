@@ -129,6 +129,18 @@ exports.Prisma.UserScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.PortalProfileScalarFieldEnum = {
+  id: 'id',
+  authUserId: 'authUserId',
+  email: 'email',
+  fullName: 'fullName',
+  role: 'role',
+  headline: 'headline',
+  bio: 'bio',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.VacancyScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -159,6 +171,7 @@ exports.Prisma.CandidateScalarFieldEnum = {
   offerDeadline: 'offerDeadline',
   resumeUrl: 'resumeUrl',
   assignedRecruiterId: 'assignedRecruiterId',
+  portalProfileId: 'portalProfileId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -226,6 +239,7 @@ exports.Prisma.JsonNullValueFilter = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  PortalProfile: 'PortalProfile',
   Vacancy: 'Vacancy',
   Stage: 'Stage',
   Candidate: 'Candidate',

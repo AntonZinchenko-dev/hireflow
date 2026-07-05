@@ -1,11 +1,13 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/shared/lib/supabase-client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Eye, EyeOff, Sparkles, Target, TimerReset } from "lucide-react";
+import { resolveAppRole } from "@/shared/lib/auth-role";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -21,7 +23,7 @@ export default function LoginPage() {
     setError(null);
     setIsPending(true);
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
@@ -32,7 +34,8 @@ export default function LoginPage() {
       return;
     }
 
-    router.push("/board");
+    const role = resolveAppRole(data.user);
+    router.push(role === "employer" ? "/vacancies" : "/jobs");
     router.refresh();
   }
 
@@ -42,7 +45,6 @@ export default function LoginPage() {
         <div className="absolute -right-20 -top-20 size-72 rounded-full bg-white/15 blur-3xl" />
         <div className="absolute -bottom-24 left-0 size-80 rounded-full bg-cyan-300/20 blur-3xl" />
         <div className="relative space-y-8">
-          <Badge className="w-fit bg-white/15 text-white">Recruiting OS</Badge>
           <div className="space-y-3">
             <h1 className="max-w-md text-4xl font-semibold leading-tight">
               Нанимайте быстрее, а не тяжелее
@@ -109,6 +111,12 @@ export default function LoginPage() {
           <Button type="submit" className="h-11 w-full rounded-xl" disabled={isPending}>
             {isPending ? "Входим..." : "Войти"}
           </Button>
+          <p className="text-center text-sm text-slate-500">
+            Нет аккаунта?{" "}
+            <Link href="/register" className="font-medium text-indigo-600 hover:text-indigo-700">
+              Зарегистрироваться
+            </Link>
+          </p>
         </form>
       </section>
     </main>
