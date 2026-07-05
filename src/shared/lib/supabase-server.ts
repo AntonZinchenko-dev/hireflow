@@ -20,8 +20,9 @@ export async function createServerSupabase() {
         {
             cookies: {
                 getAll: () => cookieStore.getAll(),
-                setAll: (list) => list.forEach(({ name, value, options }) =>
-                    cookieStore.set(name, value, options)),
+                // In Server Components Next.js forbids mutating cookies.
+                // Cookie writes are handled in middleware/route handlers.
+                setAll: () => {},
             },
         }
     );
