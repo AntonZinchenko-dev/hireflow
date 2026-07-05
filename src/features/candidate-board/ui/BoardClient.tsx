@@ -10,6 +10,7 @@ import { StageColumn } from "./StageColumn";
 import type { Vacancy, Stage } from "@/entities/vacancy/types";
 import type { Candidate } from "@/entities/candidate/types";
 import { CandidateDrawer } from "@/features/candidate-form/ui/CandidateDrawer";
+import { useRealtimeSync } from "../api/useRealtimeSync";
 
 type Props = {
     vacancy: Vacancy & { stages: Stage[] };
@@ -17,6 +18,8 @@ type Props = {
 };
 
 export function BoardClient({ vacancy, initialCandidates }: Props) {
+    useRealtimeSync(vacancy.id);
+
     const { data: candidates = [] } = useCandidates(vacancy.id,
         initialCandidates);
     const { mutate: moveCandidate } = useMoveCandidate(vacancy.id);
@@ -24,6 +27,7 @@ export function BoardClient({ vacancy, initialCandidates }: Props) {
         useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
         useSensor(KeyboardSensor)
     );
+
     function handleDragEnd(event: DragEndEvent) {
         const { active, over } = event;
         if (!over) return;
@@ -40,6 +44,7 @@ export function BoardClient({ vacancy, initialCandidates }: Props) {
             moveCandidate({ candidateId, stageId: targetStageId });
         }
     }
+    
     return (
         <div className="flex h-screen flex-col bg-slate-50">
             <header className="border-b bg-white px-6 py-3">
