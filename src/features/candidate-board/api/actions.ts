@@ -5,7 +5,10 @@ import { getServerSession } from "@/shared/lib/supabase-server";
 import { logActivity } from "@/shared/lib/activity";
 import { cookies } from "next/headers";
 import type { Candidate } from "@/entities/candidate/types";
-import type { Candidate as PrismaCandidate } from "@prisma/client";
+
+type PrismaCandidate = Awaited<
+    ReturnType<typeof prisma.candidate.findFirstOrThrow>
+>;
 
 function toCandidateEntity(candidate: PrismaCandidate): Candidate {
     return {
