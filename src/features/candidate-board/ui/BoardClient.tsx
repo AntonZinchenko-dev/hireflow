@@ -1,6 +1,5 @@
 // src/features/candidate-board/ui/BoardClient.tsx
 "use client";
-import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
@@ -22,6 +21,22 @@ import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 
+const DAY_IN_MS = 1000 * 60 * 60 * 24;
+
+function getSourceFromParams(source: string | null): "all" | Candidate["source"] {
+  return source === "site" || source === "referral" || source === "agency" || source === "headhunting"
+    ? source
+    : "all";
+}
+
+function getGradeFromParams(grade: string | null): "all" | Candidate["grade"] {
+  return grade === "junior" || grade === "middle" || grade === "senior" || grade === "lead" ? grade : "all";
+}
+
+function getDaysInStage(updatedAt: Candidate["updatedAt"], nowMs: number): number {
+  return Math.floor((nowMs - new Date(updatedAt).getTime()) / DAY_IN_MS);
+}
+
 type Props = {
   vacancy: Vacancy & { stages: Stage[] };
   initialCandidates: Candidate[];
@@ -32,10 +47,15 @@ export function BoardClient({ vacancy, initialCandidates }: Props) {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [search, setSearch] = useState("");
-  const [sourceFilter, setSourceFilter] = useState<"all" | Candidate["source"]>("all");
-  const [gradeFilter, setGradeFilter] = useState<"all" | Candidate["grade"]>("all");
-  const [showStalledOnly, setShowStalledOnly] = useState(false);
+  const [search, setSearch] = useState(() => searchParams.get("q") ?? "");
+  const [sourceFilter, setSourceFilter] = useState<"all" | Candidate["source"]>(() =>
+    getSourceFromParams(searchParams.get("source"))
+  );
+  const [gradeFilter, setGradeFilter] = useState<"all" | Candidate["grade"]>(() =>
+    getGradeFromParams(searchParams.get("grade"))
+  );
+  const [showStalledOnly, setShowStalledOnly] = useState(() => searchParams.get("stalled") === "1");
+  const [nowMs, setNowMs] = useState(() => Date.now());
 
   const { data: candidates = [] } = useCandidates(vacancy.id, initialCandidates);
   const { mutate: moveCandidate } = useMoveCandidate(vacancy.id);
@@ -70,48 +90,24 @@ export function BoardClient({ vacancy, initialCandidates }: Props) {
       const matchesSearch = !searchValue || candidate.fullName.toLowerCase().includes(searchValue);
       const matchesSource = sourceFilter === "all" || candidate.source === sourceFilter;
       const matchesGrade = gradeFilter === "all" || candidate.grade === gradeFilter;
-      const daysInStage = Math.floor(
-        (Date.now() - new Date(candidate.updatedAt).getTime()) / (1000 * 60 * 60 * 24)
-      );
+      const daysInStage = getDaysInStage(candidate.updatedAt, nowMs);
       const matchesSla = !showStalledOnly || daysInStage >= 5;
 
       return matchesSearch && matchesSource && matchesGrade && matchesSla;
     });
-  }, [candidates, gradeFilter, search, showStalledOnly, sourceFilter]);
-  const stalledCandidates = candidates.filter((candidate) => {
-    const daysInStage = Math.floor(
-      (Date.now() - new Date(candidate.updatedAt).getTime()) / (1000 * 60 * 60 * 24)
-    );
-    return daysInStage >= 5;
-  }).length;
+  }, [candidates, gradeFilter, nowMs, search, showStalledOnly, sourceFilter]);
+  const stalledCandidates = useMemo(
+    () => candidates.filter((candidate) => getDaysInStage(candidate.updatedAt, nowMs) >= 5).length,
+    [candidates, nowMs]
+  );
 
   useEffect(() => {
-    const sourceFromUrl = searchParams.get("source");
-    const gradeFromUrl = searchParams.get("grade");
-    const searchFromUrl = searchParams.get("q") ?? "";
-    const stalledFromUrl = searchParams.get("stalled") === "1";
+    const intervalId = window.setInterval(() => {
+      setNowMs(Date.now());
+    }, 60_000);
 
-    const nextSource: "all" | Candidate["source"] =
-      sourceFromUrl === "site" ||
-      sourceFromUrl === "referral" ||
-      sourceFromUrl === "agency" ||
-      sourceFromUrl === "headhunting"
-        ? sourceFromUrl
-        : "all";
-
-    const nextGrade: "all" | Candidate["grade"] =
-      gradeFromUrl === "junior" ||
-      gradeFromUrl === "middle" ||
-      gradeFromUrl === "senior" ||
-      gradeFromUrl === "lead"
-        ? gradeFromUrl
-        : "all";
-
-    setSearch((prev) => (prev === searchFromUrl ? prev : searchFromUrl));
-    setSourceFilter((prev) => (prev === nextSource ? prev : nextSource));
-    setGradeFilter((prev) => (prev === nextGrade ? prev : nextGrade));
-    setShowStalledOnly((prev) => (prev === stalledFromUrl ? prev : stalledFromUrl));
-  }, [searchParams]);
+    return () => window.clearInterval(intervalId);
+  }, []);
 
   useEffect(() => {
     const nextParams = new URLSearchParams(searchParams.toString());
@@ -217,6 +213,7 @@ export function BoardClient({ vacancy, initialCandidates }: Props) {
               key={stage.id}
               stage={stage}
               candidates={filteredCandidates.filter((c) => c.stageId === stage.id)}
+              nowMs={nowMs}
             />
           ))}
         </div>

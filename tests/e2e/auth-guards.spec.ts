@@ -12,6 +12,11 @@ async function createStrictAnonymousContext(browser: Browser) {
       value: "0",
       url: "http://localhost:3000",
     },
+    {
+      name: "e2e-force-anon",
+      value: "1",
+      url: "http://localhost:3000",
+    },
   ]);
 
   return context;

@@ -8,9 +8,10 @@ import type { Stage } from "@/entities/vacancy/types";
 import type { Candidate } from "@/entities/candidate/types";
 import { cn } from "@/shared/lib/utils";
 
-export function StageColumn({ stage, candidates }: {
+export function StageColumn({ stage, candidates, nowMs }: {
     stage: Stage; candidates:
-        Candidate[]
+        Candidate[];
+    nowMs: number;
 }) {
     const { setNodeRef, isOver } = useDroppable({ id: stage.id });
     const stageToneClasses = [
@@ -46,7 +47,7 @@ export function StageColumn({ stage, candidates }: {
                             Перетащите кандидата в этот этап
                         </div>
                     )}
-                    {candidates.map((c) => <CandidateCard key={c.id} candidate={c} />)}
+                    {candidates.map((c) => <CandidateCard key={c.id} candidate={c} nowMs={nowMs} />)}
                 </div>
             </SortableContext>
         </div>

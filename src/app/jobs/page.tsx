@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { prisma } from "@/shared/lib/prisma-client";
 import { Badge } from "@/components/ui/badge";

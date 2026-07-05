@@ -5,10 +5,18 @@ import { resolveAppRole } from "@/shared/lib/auth-role";
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
   const pathname = req.nextUrl.pathname;
+  const isForceAnon =
+    process.env.NODE_ENV !== "production" &&
+    req.cookies.get("e2e-force-anon")?.value === "1";
   const isE2EBypass =
     process.env.NODE_ENV !== "production" &&
     req.cookies.get("e2e-bypass")?.value === "1" &&
     pathname.startsWith("/board");
+
+  if (isForceAnon) {
+    if (pathname === "/login" || pathname === "/register") return res;
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
 
   if (isE2EBypass) {
     return res;

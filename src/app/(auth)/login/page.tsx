@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/shared/lib/supabase-client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Eye, EyeOff, Sparkles, Target, TimerReset } from "lucide-react";
 import { resolveAppRole } from "@/shared/lib/auth-role";
 

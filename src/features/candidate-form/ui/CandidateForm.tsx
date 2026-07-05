@@ -1,6 +1,6 @@
 // src/features/candidate-form/ui/CandidateForm.tsx
 "use client";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
     candidateSchema,
@@ -44,8 +44,8 @@ export function CandidateForm({ candidate, vacancyId, defaultStageId, onSaved }:
         resolver: zodResolver(candidateSchema),
         defaultValues,
     });
-    const source = form.watch("source");
-    const grade = form.watch("grade");
+    const source = useWatch({ control: form.control, name: "source" });
+    const grade = useWatch({ control: form.control, name: "grade" });
     async function onSubmit(values: CandidateInput) {
         const result = await saveCandidateAction({ ...values, vacancyId });
         if (!result.ok) {

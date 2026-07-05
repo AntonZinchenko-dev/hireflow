@@ -25,10 +25,10 @@ const eslintConfig = defineConfig([
         {
           default: "disallow",
           rules: [
-            { from: "app", allow: ["features", "entities", "shared"] },
-            { from: "features", allow: ["features", "entities", "shared"] },
-            { from: "entities", allow: ["shared"] },
-            { from: "shared", allow: [] },
+            { from: { type: "app" }, allow: { to: { type: ["features", "entities", "shared"] } } },
+            { from: { type: "features" }, allow: { to: { type: ["features", "entities", "shared"] } } },
+            { from: { type: "entities" }, allow: { to: { type: "shared" } } },
+            { from: { type: "shared" }, allow: { to: { type: [] } } },
           ],
         },
       ],
@@ -41,6 +41,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Prisma client is generated code.
+    "prisma/generated/**",
   ]),
 ]);
 

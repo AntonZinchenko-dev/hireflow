@@ -14,7 +14,9 @@ const sourceLabels = {
     headhunting: "Хедхантинг",
 } as const;
 
-export function CandidateCard({ candidate }: { candidate: Candidate }) {
+const DAY_IN_MS = 1000 * 60 * 60 * 24;
+
+export function CandidateCard({ candidate, nowMs }: { candidate: Candidate; nowMs: number }) {
     const { attributes, listeners, setNodeRef, transform, transition, isDragging
     } = useSortable({ id: candidate.id });
     const openDrawer = useBoardStore((s) => s.openDrawer);
@@ -23,7 +25,7 @@ export function CandidateCard({ candidate }: { candidate: Candidate }) {
         opacity: isDragging ? 0.5 : 1
     };
     const daysInStage = Math.floor(
-        (Date.now() - new Date(candidate.updatedAt).getTime()) / (1000 * 60 * 60 * 24)
+        (nowMs - new Date(candidate.updatedAt).getTime()) / DAY_IN_MS
     );
     const slaLevel = daysInStage >= 5 ? "danger" : daysInStage >= 3 ? "warning" : "ok";
 
