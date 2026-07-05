@@ -22,6 +22,11 @@ export function CandidateCard({ candidate }: { candidate: Candidate }) {
         transform: CSS.Transform.toString(transform), transition,
         opacity: isDragging ? 0.5 : 1
     };
+    const daysInStage = Math.floor(
+        (Date.now() - new Date(candidate.updatedAt).getTime()) / (1000 * 60 * 60 * 24)
+    );
+    const slaLevel = daysInStage >= 5 ? "danger" : daysInStage >= 3 ? "warning" : "ok";
+
     return (
         <div
             ref={setNodeRef}
@@ -36,6 +41,12 @@ export function CandidateCard({ candidate }: { candidate: Candidate }) {
             <div className="mt-2 flex flex-wrap items-center gap-1.5">
                 <Badge variant="outline">{candidate.grade}</Badge>
                 <Badge variant="secondary">{sourceLabels[candidate.source]}</Badge>
+                <Badge
+                    variant={slaLevel === "danger" ? "destructive" : "outline"}
+                    className={slaLevel === "warning" ? "border-amber-300 bg-amber-50 text-amber-700" : ""}
+                >
+                    {daysInStage}д в этапе
+                </Badge>
             </div>
             <p className="mt-2 text-xs font-medium text-slate-500">
                 Ожидание: {formatMoney(candidate.expectedSalary)}

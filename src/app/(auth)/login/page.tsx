@@ -5,11 +5,12 @@ import { createClient } from "@/shared/lib/supabase-client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Sparkles, Target, TimerReset } from "lucide-react";
+import { Eye, EyeOff, Sparkles, Target, TimerReset } from "lucide-react";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
@@ -74,7 +75,7 @@ export default function LoginPage() {
           <div className="space-y-1">
             <p className="text-xs font-medium uppercase tracking-[0.16em] text-indigo-600">Welcome back</p>
             <h2 className="text-3xl font-semibold tracking-tight text-slate-900">Вход в HireFlow</h2>
-            <p className="text-sm text-slate-500">Используйте рабочий аккаунт для доступа к воронке.</p>
+            <p className="text-sm text-slate-500">Используйте рабочий аккаунт для доступа.</p>
           </div>
           <div className="space-y-3">
             <Input
@@ -85,14 +86,24 @@ export default function LoginPage() {
               required
               className="h-11 rounded-xl"
             />
-            <Input
-              type="password"
-              placeholder="Пароль"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="h-11 rounded-xl"
-            />
+            <div className="relative">
+              <Input
+                type={showPassword ? "text" : "password"}
+                placeholder="Пароль"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="h-11 rounded-xl pr-10"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((value) => !value)}
+                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md p-1 text-slate-500 transition hover:bg-slate-100 hover:text-slate-700"
+                aria-label={showPassword ? "Скрыть пароль" : "Показать пароль"}
+              >
+                {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+              </button>
+            </div>
           </div>
           {error && <p className="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
           <Button type="submit" className="h-11 w-full rounded-xl" disabled={isPending}>

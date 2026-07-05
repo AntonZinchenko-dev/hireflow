@@ -32,6 +32,21 @@ export default async function AnalyticsPage() {
     const endToEndConversion = totalCandidates > 0
         ? Math.round((finalCandidates / totalCandidates) * 100)
         : 0;
+    const stageConversions = funnel.slice(1).map((point) => point.conversionRate);
+    const averageStageConversion = stageConversions.length > 0
+        ? Math.round(stageConversions.reduce((sum, value) => sum + value, 0) / stageConversions.length)
+        : 0;
+    const biggestDrop = funnel.slice(1).reduce<{
+        stageName: string;
+        drop: number;
+    }>((current, point, index) => {
+        const previousCount = funnel[index]?.count ?? point.count;
+        const drop = Math.max(0, previousCount - point.count);
+        if (drop > current.drop) {
+            return { stageName: point.stageName, drop };
+        }
+        return current;
+    }, { stageName: "-", drop: 0 });
 
     return (
         <section className="hf-page">
@@ -42,7 +57,7 @@ export default async function AnalyticsPage() {
                     Актуальная конверсия по этапам подбора для последней вакансии.
                 </p>
             </div>
-            <div className="grid gap-4 sm:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
                 <div className="rounded-xl border border-slate-200 bg-white/85 px-4 py-3">
                     <p className="text-sm text-slate-500">Входящий поток</p>
                     <p className="text-2xl font-semibold text-slate-900">{totalCandidates}</p>
@@ -54,6 +69,15 @@ export default async function AnalyticsPage() {
                 <div className="rounded-xl border border-slate-200 bg-white/85 px-4 py-3">
                     <p className="text-sm text-slate-500">End-to-end конверсия</p>
                     <p className="text-2xl font-semibold text-indigo-700">{endToEndConversion}%</p>
+                </div>
+                <div className="rounded-xl border border-slate-200 bg-white/85 px-4 py-3">
+                    <p className="text-sm text-slate-500">Средняя конверсия этапов</p>
+                    <p className="text-2xl font-semibold text-slate-900">{averageStageConversion}%</p>
+                </div>
+                <div className="rounded-xl border border-slate-200 bg-white/85 px-4 py-3">
+                    <p className="text-sm text-slate-500">Самый узкий этап</p>
+                    <p className="text-sm font-semibold text-slate-900">{biggestDrop.stageName}</p>
+                    <p className="text-xs text-rose-600">Потеря: {biggestDrop.drop}</p>
                 </div>
             </div>
             <div className="hf-card p-5">
