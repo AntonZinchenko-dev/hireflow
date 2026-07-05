@@ -16,6 +16,7 @@ export function CandidateCard({ candidate }: { candidate: Candidate }) {
     return (
         <div
             ref={setNodeRef}
+            data-testid={`candidate-card-${candidate.id}`}
             style={style}
             {...attributes}
             {...listeners}

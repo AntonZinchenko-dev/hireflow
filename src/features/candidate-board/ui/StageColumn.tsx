@@ -16,6 +16,7 @@ export function StageColumn({ stage, candidates }: {
     return (
         <div
             ref={setNodeRef}
+            data-testid={`stage-column-${stage.id}`}
             className={cn(
                 "flex w-72 flex-shrink-0 flex-col rounded-lg border bg-white p-3",
                 isOver && "ring-2 ring-blue-400"

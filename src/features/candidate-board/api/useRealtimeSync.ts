@@ -30,7 +30,13 @@ export function useRealtimeSync(vacancyId: string) {
                     });
                 }
             )
-            .subscribe();
+            .subscribe((status) => {
+                if (status === "SUBSCRIBED") {
+                    // If an update happened before subscription was ready,
+                    // synchronize once from source of truth.
+                    qc.invalidateQueries({ queryKey: ["candidates", vacancyId] });
+                }
+            });
         return () => { supabase.removeChannel(channel); };
     }, [vacancyId, qc]);
 }

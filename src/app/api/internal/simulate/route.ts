@@ -1,6 +1,7 @@
 // src/app/api/internal/simulate/route.ts
 import { moveRandomCandidate, createRandomCandidate, addRandomComment } from
     "@/shared/lib/simulation-actions";
+import { resetPrismaClient } from "@/shared/lib/prisma-client";
 
 const WEIGHTED_ACTIONS = [
     { action: moveRandomCandidate, weight: 45 },
@@ -20,12 +21,29 @@ function pickAction() {
     }
     return fallbackAction;
 }
+
+function isRecoverablePrismaError(error: unknown) {
+    if (!(error instanceof Error)) return false;
+    const message = error.message.toLowerCase();
+    return message.includes("not queryable")
+        || message.includes("connection terminated unexpectedly")
+        || message.includes("emaxconnsession")
+        || message.includes("can't reach database server");
+}
+
 export async function POST(req: Request) {
     const secret = req.headers.get("x-simulation-secret");
     if (secret !== process.env.SIMULATION_SECRET) {
         return new Response("Forbidden", { status: 403 });
     }
     const action = pickAction();
-    const result = await action();
-    return Response.json({ ok: true, result });
+    try {
+        const result = await action();
+        return Response.json({ ok: true, result });
+    } catch (error) {
+        if (!isRecoverablePrismaError(error)) throw error;
+        await resetPrismaClient();
+        const result = await action();
+        return Response.json({ ok: true, result, recovered: true });
+    }
 }
