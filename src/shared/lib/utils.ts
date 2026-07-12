@@ -14,6 +14,6 @@ export function cn(...inputs: ClassValue[]) {
     const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
     if (days === 0) return "сегодня";
     if (days === 1) return "вчера";
-    return `${days} дн. назад`;
+    return `${days} дн. назад.`;
    }
    
