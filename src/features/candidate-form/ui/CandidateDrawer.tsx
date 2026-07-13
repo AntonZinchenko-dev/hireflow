@@ -24,12 +24,12 @@ export function CandidateDrawer({
     return (
         <Sheet open={!!openId} onOpenChange={(open) => !open &&
             closeDrawer(null)}>
-            <SheetContent side="right" className="w-[460px] overflow-y-auto border-l border-[#3a3d44] bg-[#2b2d31]/98">
-                <SheetHeader className="border-b border-[#3a3d44] pb-5">
-                    <SheetTitle className="text-left text-lg font-semibold text-[#f2f3f5]">
+            <SheetContent side="right" className="w-[460px] overflow-y-auto border-l border-border bg-card">
+                <SheetHeader className="border-b border-border pb-5">
+                    <SheetTitle className="text-left text-lg font-semibold text-foreground">
                         {selectedCandidate ? selectedCandidate.fullName : "Карточка кандидата"}
                     </SheetTitle>
-                    <p className="text-left text-sm text-[#b5bac1]">
+                    <p className="text-left text-sm text-muted-foreground">
                         Обновите данные и сохраните изменения в профиле.
                     </p>
                 </SheetHeader>

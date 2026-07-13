@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { BarChart3, BriefcaseBusiness, LogOut, Sparkles, User } from "lucide-react";
+import { BarChart3, BriefcaseBusiness, LogOut, Search, User } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { createClient } from "@/shared/lib/supabase-client";
 import { cn } from "@/shared/lib/utils";
@@ -72,15 +72,15 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen">
-      <header className="sticky top-0 z-30 border-b border-[#3a3d44] bg-[#1e1f22]/90 backdrop-blur-xl">
+      <header className="sticky top-0 z-30 border-b border-[rgba(0,0,0,0.09)] bg-[#f7f7f5]/95 backdrop-blur-xl">
         <div className="mx-auto flex h-[4.5rem] w-full max-w-[1600px] items-center justify-between gap-4 px-4 sm:px-6">
           <Link href={homeHref} className="flex items-center gap-2">
-            <span className="inline-flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-sky-500 text-white shadow-sm">
-              <Sparkles className="size-4" />
+            <span className="inline-flex size-8 items-center justify-center rounded-lg bg-[#cc2229] text-white shadow-sm">
+              <Search className="size-4" />
             </span>
-            <span className="text-sm font-semibold tracking-wide text-[#f2f3f5]">HireFlow 2.0</span>
+            <span className="text-sm font-semibold tracking-wide text-[#1a1a1a]">Работа.Найм</span>
           </Link>
-          <nav className="flex max-w-full items-center gap-1.5 overflow-x-auto rounded-lg border border-[#3a3d44] bg-[#2b2d31]/85 p-1.5">
+          <nav className="flex max-w-full items-center gap-1.5 overflow-x-auto rounded-xl border border-[rgba(0,0,0,0.09)] bg-white p-1.5">
             {navItems.map((item) => {
               const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
               const Icon = item.icon;
@@ -90,8 +90,8 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
                   href={item.href}
                   className={cn(
                     buttonVariants({ variant: "ghost", size: "sm" }),
-                    "h-9 rounded-md px-3.5 text-[#b5bac1] transition",
-                    isActive && "bg-gradient-to-r from-indigo-500 to-sky-500 text-white hover:text-white"
+                    "h-9 rounded-lg px-3.5 text-[#6b6b6b] transition",
+                    isActive && "bg-[#cc2229] text-white hover:text-white"
                   )}
                 >
                   <Icon className="size-4" />
@@ -110,7 +110,7 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
           </button>
         </div>
         <div className="mx-auto w-full max-w-[1600px] px-4 pb-4 sm:px-6">
-          <p className="text-xs font-medium uppercase tracking-[0.16em] text-[#8f95a0]">{sectionTitle}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#6b6b6b]">{sectionTitle}</p>
         </div>
       </header>
       <main className="mx-auto w-full max-w-[1600px] px-4 py-8 sm:px-6">{children}</main>

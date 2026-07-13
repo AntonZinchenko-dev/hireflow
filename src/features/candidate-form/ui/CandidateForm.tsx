@@ -16,8 +16,8 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 
 const selectClassName =
-    "h-10 w-full rounded-xl border border-input bg-[#1a1b1e] px-3 text-sm text-[#f2f3f5] outline-none transition focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/40";
-const selectOptionClassName = "bg-[#1a1b1e] text-[#f2f3f5]";
+    "h-10 w-full rounded-xl border border-input bg-input-background px-3 text-sm text-foreground outline-none transition focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/40";
+const selectOptionClassName = "bg-card text-foreground";
 
 export function CandidateForm({ candidate, vacancyId, defaultStageId, onSaved }: {
     candidate?: Candidate;
@@ -64,14 +64,14 @@ export function CandidateForm({ candidate, vacancyId, defaultStageId, onSaved }:
             <input type="hidden" value={vacancyId} readOnly />
             <input type="hidden" {...form.register("stageId")} />
             <div className="space-y-1.5">
-                <Label htmlFor="fullName" className="text-[#dbdee1]">ФИО кандидата</Label>
+                <Label htmlFor="fullName" className="text-foreground">ФИО кандидата</Label>
                 <Input id="fullName" placeholder="Иван Петров" {...form.register("fullName")} />
                 {form.formState.errors.fullName && (
                     <p className="text-xs text-red-600">{form.formState.errors.fullName.message}</p>
                 )}
             </div>
             <div className="space-y-1.5">
-                <Label htmlFor="source" className="text-[#dbdee1]">Источник</Label>
+                <Label htmlFor="source" className="text-foreground">Источник</Label>
                 <select id="source" {...form.register("source")} className={selectClassName}>
                     <option className={selectOptionClassName} value="site">Сайт</option>
                     <option className={selectOptionClassName} value="referral">Реферал</option>
@@ -81,7 +81,7 @@ export function CandidateForm({ candidate, vacancyId, defaultStageId, onSaved }:
             </div>
             {source === "referral" && (
                 <div className="space-y-1.5">
-                    <Label htmlFor="referrerName" className="text-[#dbdee1]">Кто порекомендовал</Label>
+                    <Label htmlFor="referrerName" className="text-foreground">Кто порекомендовал</Label>
                     <Input id="referrerName" placeholder="Имя коллеги"
                         {...form.register("referrerName")} />
                     {form.formState.errors.referrerName && (
@@ -90,7 +90,7 @@ export function CandidateForm({ candidate, vacancyId, defaultStageId, onSaved }:
                 </div>
             )}
             <div className="space-y-1.5">
-                <Label htmlFor="grade" className="text-[#dbdee1]">Грейд</Label>
+                <Label htmlFor="grade" className="text-foreground">Грейд</Label>
                 <select id="grade" {...form.register("grade")} className={selectClassName}>
                     <option className={selectOptionClassName} value="junior">Junior</option>
                     <option className={selectOptionClassName} value="middle">Middle</option>
@@ -100,7 +100,7 @@ export function CandidateForm({ candidate, vacancyId, defaultStageId, onSaved }:
             </div>
             {["senior", "lead"].includes(grade) && (
                 <div className="space-y-1.5">
-                    <Label htmlFor="seniorityExpectations" className="text-[#dbdee1]">Ожидания по роли</Label>
+                    <Label htmlFor="seniorityExpectations" className="text-foreground">Ожидания по роли</Label>
                     <Textarea id="seniorityExpectations" placeholder="Опыт в продукте, ownership, leadership"
                         {...form.register("seniorityExpectations")} />
                     {form.formState.errors.seniorityExpectations && (
@@ -109,7 +109,7 @@ export function CandidateForm({ candidate, vacancyId, defaultStageId, onSaved }:
                 </div>
             )}
             <div className="space-y-1.5">
-                <Label htmlFor="expectedSalary" className="text-[#dbdee1]">Ожидаемая зарплата</Label>
+                <Label htmlFor="expectedSalary" className="text-foreground">Ожидаемая зарплата</Label>
                 <Input id="expectedSalary" type="number" placeholder="220000"
                     {...form.register("expectedSalary")} />
             </div>

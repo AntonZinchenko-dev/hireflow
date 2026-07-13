@@ -37,20 +37,20 @@ export function CandidateCard({ candidate, nowMs }: { candidate: Candidate; nowM
             {...attributes}
             {...listeners}
             onClick={() => openDrawer(candidate.id)}
-            className="cursor-grab rounded-xl border border-[#3f424a] bg-[#1f2125]/95 p-3.5 shadow-[0_8px_20px_-14px_rgba(0,0,0,0.85)] transition hover:-translate-y-0.5 hover:border-[#5865f2] hover:shadow-[0_12px_28px_-18px_rgba(88,101,242,0.5)] active:cursor-grabbing"
+            className="cursor-grab rounded-xl border border-border bg-card p-3.5 shadow-[0_8px_20px_-14px_rgba(0,0,0,0.3)] transition hover:-translate-y-0.5 hover:border-primary hover:shadow-[0_12px_28px_-18px_rgba(204,34,41,0.45)] active:cursor-grabbing"
         >
-            <div className="font-medium text-[#f2f3f5]">{candidate.fullName}</div>
+            <div className="font-medium text-foreground">{candidate.fullName}</div>
             <div className="mt-2 flex flex-wrap items-center gap-1.5">
                 <Badge variant="outline">{candidate.grade}</Badge>
                 <Badge variant="secondary">{sourceLabels[candidate.source]}</Badge>
                 <Badge
                     variant={slaLevel === "danger" ? "destructive" : "outline"}
-                    className={slaLevel === "warning" ? "border-[#f0b232] bg-[#f0b232]/15 text-[#f0b232]" : ""}
+                    className={slaLevel === "warning" ? "border-amber-500/40 bg-amber-500/15 text-amber-700" : ""}
                 >
                     {daysInStage}д в этапе
                 </Badge>
             </div>
-            <p className="mt-2 text-xs font-medium text-[#b5bac1]">
+            <p className="mt-2 text-xs font-medium text-muted-foreground">
                 Ожидание: {formatMoney(candidate.expectedSalary)}
             </p>
         </div>

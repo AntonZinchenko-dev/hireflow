@@ -47,29 +47,29 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="grid min-h-screen grid-cols-1 bg-transparent lg:grid-cols-[1.05fr_0.95fr]">
-      <section className="relative hidden overflow-hidden border-r border-[#3a3d44] bg-gradient-to-br from-[#313338] via-[#2b2d31] to-[#1e1f22] p-12 text-white lg:block">
-        <div className="absolute -right-20 -top-20 size-72 rounded-full bg-white/15 blur-3xl" />
-        <div className="absolute -bottom-24 left-0 size-80 rounded-full bg-cyan-300/20 blur-3xl" />
+    <main className="grid min-h-screen grid-cols-1 bg-background lg:grid-cols-[1.05fr_0.95fr]">
+      <section className="relative hidden overflow-hidden border-r border-border bg-gradient-to-br from-[#efe9de] via-[#f7f7f5] to-[#ebe6dd] p-12 lg:block">
+        <div className="absolute -right-20 -top-20 size-72 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute -bottom-24 left-0 size-80 rounded-full bg-accent/10 blur-3xl" />
         <div className="relative space-y-8">
           <div className="space-y-3">
-            <h1 className="max-w-md text-4xl font-semibold leading-tight">
+            <h1 className="max-w-md text-4xl leading-tight text-foreground">
               Нанимайте быстрее, а не тяжелее
             </h1>
-            <p className="max-w-md text-sm text-white/85">
+            <p className="max-w-md text-sm text-muted-foreground">
               HireFlow 2.0 объединяет канбан, профиль кандидата и аналитику конверсии в одном интерфейсе.
             </p>
           </div>
           <div className="space-y-3">
-            <div className="flex items-center gap-3 rounded-lg bg-white/10 p-3">
+            <div className="flex items-center gap-3 rounded-lg border border-border bg-card p-3">
               <Sparkles className="size-4 shrink-0" />
               <p className="text-sm">Единая доска по всем этапам подбора</p>
             </div>
-            <div className="flex items-center gap-3 rounded-lg bg-white/10 p-3">
+            <div className="flex items-center gap-3 rounded-lg border border-border bg-card p-3">
               <Target className="size-4 shrink-0" />
               <p className="text-sm">Прозрачная конверсия и узкие места воронки</p>
             </div>
-            <div className="flex items-center gap-3 rounded-lg bg-white/10 p-3">
+            <div className="flex items-center gap-3 rounded-lg border border-border bg-card p-3">
               <TimerReset className="size-4 shrink-0" />
               <p className="text-sm">Меньше ручных апдейтов, больше живой работы</p>
             </div>
@@ -79,12 +79,12 @@ export default function LoginPage() {
       <section className="flex items-center justify-center px-6 py-12">
         <form
           onSubmit={handleSubmit}
-          className="w-full max-w-md space-y-6 rounded-lg border border-[#3a3d44] bg-[#2b2d31]/95 p-8 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.8)]"
+          className="w-full max-w-md space-y-6 rounded-2xl border border-border bg-card p-8 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.3)]"
         >
           <div className="space-y-1">
-            <p className="text-xs font-medium uppercase tracking-[0.16em] text-indigo-600">Welcome back</p>
-            <h2 className="text-3xl font-semibold tracking-tight text-[#f2f3f5]">Вход в HireFlow</h2>
-            <p className="text-sm text-[#b5bac1]">Используйте рабочий аккаунт для доступа.</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Welcome back</p>
+            <h2 className="text-3xl tracking-tight text-foreground">Вход в HireFlow</h2>
+            <p className="text-sm text-muted-foreground">Используйте рабочий аккаунт для доступа.</p>
           </div>
           <div className="space-y-3">
             <Input
@@ -107,20 +107,20 @@ export default function LoginPage() {
               <button
                 type="button"
                 onClick={() => setShowPassword((value) => !value)}
-                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md p-1 text-[#8f95a0] transition hover:bg-[#353841] hover:text-[#dbdee1]"
+                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md p-1 text-muted-foreground transition hover:bg-secondary hover:text-foreground"
                 aria-label={showPassword ? "Скрыть пароль" : "Показать пароль"}
               >
                 {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
               </button>
             </div>
           </div>
-          {error && <p className="rounded-md border border-red-900/40 bg-red-950/40 px-3 py-2 text-sm text-red-300">{error}</p>}
+          {error && <p className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">{error}</p>}
           <Button type="submit" className="h-11 w-full rounded-md" disabled={isPending}>
             {isPending ? "Входим..." : "Войти"}
           </Button>
-          <p className="text-center text-sm text-[#b5bac1]">
+          <p className="text-center text-sm text-muted-foreground">
             Нет аккаунта?{" "}
-            <Link href="/register" className="font-medium text-indigo-600 hover:text-indigo-700">
+            <Link href="/register" className="font-medium text-primary hover:text-primary/80">
               Зарегистрироваться
             </Link>
           </p>

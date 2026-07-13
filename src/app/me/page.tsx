@@ -27,7 +27,7 @@ export default async function ProfilePage() {
       <form action={updateProfileAction} className="hf-card p-6">
         <div className="grid gap-4 md:grid-cols-2">
           <div className="space-y-1.5 md:col-span-2">
-            <label htmlFor="fullName" className="text-sm font-medium text-[#dbdee1]">
+            <label htmlFor="fullName" className="text-sm font-medium text-foreground">
               Имя
             </label>
             <Input
@@ -39,19 +39,19 @@ export default async function ProfilePage() {
             />
           </div>
           <div className="space-y-1.5">
-            <label htmlFor="email" className="text-sm font-medium text-[#dbdee1]">
+            <label htmlFor="email" className="text-sm font-medium text-foreground">
               Email
             </label>
-            <Input id="email" defaultValue={session.user.email ?? ""} readOnly className="h-11 rounded-md bg-[#232428]" />
+            <Input id="email" defaultValue={session.user.email ?? ""} readOnly className="h-11 rounded-md bg-secondary" />
           </div>
           <div className="space-y-1.5">
-            <label htmlFor="role" className="text-sm font-medium text-[#dbdee1]">
+            <label htmlFor="role" className="text-sm font-medium text-foreground">
               Роль
             </label>
-            <Input id="role" defaultValue={profile.role} readOnly className="h-11 rounded-md bg-[#232428]" />
+            <Input id="role" defaultValue={profile.role} readOnly className="h-11 rounded-md bg-secondary" />
           </div>
           <div className="space-y-1.5 md:col-span-2">
-            <label htmlFor="headline" className="text-sm font-medium text-[#dbdee1]">
+            <label htmlFor="headline" className="text-sm font-medium text-foreground">
               Заголовок
             </label>
             <Input
@@ -63,7 +63,7 @@ export default async function ProfilePage() {
             />
           </div>
           <div className="space-y-1.5 md:col-span-2">
-            <label htmlFor="bio" className="text-sm font-medium text-[#dbdee1]">
+            <label htmlFor="bio" className="text-sm font-medium text-foreground">
               О себе
             </label>
             <Textarea
